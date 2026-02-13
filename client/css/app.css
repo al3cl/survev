@@ -666,9 +666,9 @@ a:active {
 }
 
 .btn-green {
-  background: #83af50;
-  border-bottom: 2px solid #5b7a38;
-  box-shadow: inset 0 -2px #5b7a38;
+  background: #c539f9;
+  border-bottom: 2px solid #8226a3;
+  box-shadow: inset 0 -2px #8226a3;
   color: #fff;
   cursor: pointer;
   font-size: 16px;
@@ -678,8 +678,8 @@ a:active {
 
 @media (max-width: 850px), (max-width: 900px) and (min-resolution: 3dppx) {
   .btn-green {
-    background: #9850af;
-    border-bottom: 2px solid #683679;
+    background: #c539f9;
+    border-bottom: 2px solid #8226a3;
     box-shadow: none;
     font-size: 12px;
   }
@@ -1136,9 +1136,9 @@ a:active {
 }
 
 .btn-team-option {
-  background: #50afab;
-  border-bottom: 2px solid #387c79;
-  box-shadow: inset 0 -2px #387c79;
+  background: #b2adfc;
+  border-bottom: 2px solid #7874a8;
+  box-shadow: inset 0 -2px #7874a8;
   color: #fff;
   cursor: pointer;
   position: relative;
