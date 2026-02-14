@@ -1109,13 +1109,13 @@ a:active {
 }
 
 #btn-customize {
-  background: #1e90ff;
+  background: #ffa91e;
   background-image: url(/img/emotes/surviv.svg);
   background-position: 8px 5px;
   background-repeat: no-repeat;
   background-size: 28px;
-  border-bottom: 2px solid #1871c8;
-  box-shadow: inset 0 -2px #1871c8;
+  border-bottom: 2px solid #a87014;
+  box-shadow: inset 0 -2px #a87014;
   color: #fff;
   cursor: pointer;
   font-size: 16px;
@@ -1690,7 +1690,7 @@ a:active {
   }
 
   50% {
-    background-color: #50afab;
+    background-color: #b2adfc;
   }
 
   100% {
@@ -2219,7 +2219,7 @@ a:active {
 @media (max-width: 850px), (max-width: 900px) and (min-resolution: 3dppx) {
   .btn-leaderboard-stats-link {
     background-size: 22px !important;
-    box-shadow: inset 0 -1px #1871c8 !important;
+    box-shadow: inset 0 -1px #a87014 !important;
     display: inline-block;
     font-size: 15px;
     height: 32px;
@@ -2276,18 +2276,18 @@ a:active {
 
 .account-details-top-buttons > .account-details-link-out {
   background-image: url(/img/gui/link.svg);
-  background-color: #1e90ff;
+  background-color: #ffa91e;
   background-position: 97%;
-  border-bottom: 2px solid #1871c8;
-  box-shadow: inset 0 -2px #1871c8;
+  border-bottom: 2px solid #a87014;
+  box-shadow: inset 0 -2px #a87014;
 }
 
 .account-details-top-buttons > .account-details-button-loadout {
   background-image: url(/img/emotes/surviv.svg);
-  background-color: #1e90ff;
+  background-color: #ffa91e;
   background-position: 96%;
-  border-bottom: 2px solid #1871c8;
-  box-shadow: inset 0 -2px #1871c8;
+  border-bottom: 2px solid #a87014;
+  box-shadow: inset 0 -2px #a87014;
 }
 
 .account-details-top-buttons > .account-details-button-wrapper {
@@ -2410,9 +2410,9 @@ a:active {
   background-position: 97%;
   background-repeat: no-repeat;
   background-size: 28px;
-  background-color: #1e90ff;
-  border-bottom: 2px solid #1871c8;
-  box-shadow: inset 0 -2px #1871c8;
+  background-color: #ffa91e;
+  border-bottom: 2px solid #a87014;
+  box-shadow: inset 0 -2px #a87014;
   color: #fff !important;
 }
 
@@ -2421,9 +2421,9 @@ a:active {
   background-position: 97%;
   background-repeat: no-repeat;
   background-size: 28px;
-  background-color: #1e90ff;
-  border-bottom: 2px solid #1871c8;
-  box-shadow: inset 0 -2px #1871c8;
+  background-color: #ffa91e;
+  border-bottom: 2px solid #a87014;
+  box-shadow: inset 0 -2px #a87014;
   color: #fff !important;
 }
 
@@ -3974,9 +3974,9 @@ a:active {
 }
 
 #btn-pass-locked {
-  background-color: #1e90ff;
-  border-bottom: 2px solid #1871c8;
-  box-shadow: inset 0 -2px #1871c8;
+  background-color: #ffa91e;
+  border-bottom: 2px solid #a87014;
+  box-shadow: inset 0 -2px #a87014;
   color: #fff;
   font-weight: 400;
   height: max-content;
@@ -5802,7 +5802,7 @@ input [type="image"]:focus {
   width: 100%;
   height: 4px;
   border-radius: 2px;
-  background: #387c79;
+  background: #7874a8;
   outline: none;
   opacity: 0.7;
   transition: opacity 0.2s;
@@ -5813,7 +5813,7 @@ input [type="image"]:focus {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #50afab;
+  background: #b2adfc;
   cursor: pointer;
 }
 
@@ -5821,7 +5821,7 @@ input [type="image"]:focus {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #50afab;
+  background: #b2adfc;
   cursor: pointer;
 }
 
@@ -6464,7 +6464,7 @@ input [type="image"]:focus {
     width: 100%;
     height: 4px;
     border-radius: 2px;
-    background: #387c79;
+    background: #7874a8;
     outline: none;
     opacity: 0.7;
     transition: opacity 0.2s;
@@ -6475,7 +6475,7 @@ input [type="image"]:focus {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: #50afab;
+    background: #b2adfc;
     cursor: inherit;
   }
 
@@ -6483,7 +6483,7 @@ input [type="image"]:focus {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: #50afab;
+    background: #b2adfc;
     cursor: inherit;
   }
 
@@ -7168,4 +7168,9 @@ input [type="image"]:focus {
     height: 280px;
     top: 310px;
   }
+}
+
+input[type="checkbox"] {
+  accent-color: #ffa91e;
+  /* accent-color: #c539f9; */
 }
