@@ -617,7 +617,15 @@ export class Bullet {
 
                     let multiplier = 1;
                     if (isHighValueTarget) {
-                        multiplier *= 1.25;
+                        // for perk absorption mode:
+                        // 5% damage bonus per each perk above 1 the opponent has
+                        // e.g.
+                        // 0, 1 perk = no buff
+                        // 2 perks = +5%
+                        // 6 perks = +25%
+                        // 10 perks = +45%
+                        let bonus = 1 + (col.player!.perks.length - 1) * 0.05
+                        multiplier *= bonus;
                     }
 
                     this.bulletManager.damages.push({
