@@ -1341,6 +1341,55 @@ export class Player extends BaseGameObject {
     // about logging find_game IP's
     findGameIp: string;
 
+    // perks the player could spawn with (allowed perks for this mode)
+    static readonly ALLOWED_SPAWN_PERK_TYPES: string[] = [
+        "leadership",               // Leadership (full adren)
+        "assume_leadership",        // Assume Leadership (half adren, size increase)
+        "firepower",                // Firepower
+        "gotw",                     // Gift of the Woods (restores health over time)
+        "windwalk",                 // Windwalk
+        "rare_potato",              // Rare Potato
+        // "aoe_heal",                 // Mass Medicate
+        "endless_ammo",             // Endless Ammo
+        "steelskin",                // Cast Ironskin
+        "ap_rounds",                // AP Rounds
+        "splinter",                 // Splinter Rounds
+        "small_arms",               // Small Arms
+        "takedown",                 // Takedown
+        "field_medic",              // Combat Medic
+        "tree_climbing",            // One With Nature
+        "scavenger",                // Scavenger
+        "scavenger_adv",            // Master Scavenger
+        "pirate",                   // Pirate's Bounty (extra loot with melee)
+        // "hunted",                   // The Hunted
+        "chambered",                // One In The Chamber
+        "martyrdom",                // Martyrdom
+        "targeting",                // High-Value Targets
+        "bonus_45",                 // .45 In The Chamber
+        // "broken_arrow",             // Broken Arrow
+        "fabricate",                // Fabricate
+        "self_revive",              // Revivify
+        "bonus_9mm",                // 9mm Overpressure
+        "flak_jacket",              // Flak Jacket
+        "explosive",                // Explosive Rounds
+        "bonus_assault",            // Hollow-points
+        // "inspiration",              // Inspiration (makes bugle work)
+        // "final_bugle",              // Last Breath (teammate boost)
+        "high_velocity",            // High-Velocity Rounds
+        // "halloween_mystery",        // Trick or Treat? (hides actual perk)
+        // "trick_nothing",            // One With Nothing
+        // "trick_size",               // Feedership (player size increase)
+        // "trick_m9",                 // Dev Troll Special (gives cursed m9)
+        // "trick_chatty",             // Gabby Ghost (randomly emoting)
+        // "trick_drain",              // That Sucks (slow bleeding)
+        "treat_9mm",                // Candy Corn
+        "treat_12g",                // Red Jelly Beans
+        "treat_556",                // Sour Apple Belt
+        "treat_762",                // Blueberry Taffy
+        "treat_super",              // Full Size OKAMI Bar (darker more powerful bullets)
+        "turkey_shoot",             // Perky Shoot (turkey effect on death)
+    ];
+
     constructor(
         game: Game,
         pos: Vec2,
@@ -1425,6 +1474,10 @@ export class Player extends BaseGameObject {
             assertType(perk.type, "perk", false);
             this.addPerk(perk.type, perk.droppable);
         }
+
+        // assign random perk on spawn
+        const randomPerk = util.randomItem(Player.ALLOWED_SPAWN_PERK_TYPES);
+        this.addPerk(randomPerk!, false);
 
         for (const [item, amount] of Object.entries(defaultItems.inventory)) {
             this.invManager.set(item as InventoryItem, amount);
@@ -2921,6 +2974,13 @@ export class Player extends BaseGameObject {
             }
             killMsg.killCreditId = killCreditSource.__id;
             killMsg.killerKills = killCreditSource.kills;
+
+            // perk absorption
+            for (const perk of this.perks) {
+                if (!killCreditSource.hasPerk(perk.type)) {
+                    killCreditSource.addPerk(perk.type, false);
+                }
+            }
         }
 
         if (params.source?.__type === ObjectType.Player) {
