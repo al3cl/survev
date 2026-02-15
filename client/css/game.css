@@ -2514,19 +2514,94 @@ img {
   }
 }
 
+/* this shit sucks btw */
 #ui-perk-0 {
+  left: 124px;
+}
+#ui-perk-1 {
+  left: 64px;
+}
+#ui-perk-2 {
   left: 4px;
 }
-
-#ui-perk-1 {
+#ui-perk-3 {
   right: 0px;
 }
-
-#ui-perk-2 {
+#ui-perk-4 {
   right: 60px;
 }
-#ui-perk-3 {
+#ui-perk-5 {
   right: 120px;
+}
+#ui-perk-6 {
+  right: 180px;
+}
+#ui-perk-7 {
+  right: 240px;
+}
+#ui-perk-8 {
+  bottom: 72px;
+  left: 124px;
+}
+#ui-perk-9 {
+  bottom: 72px;
+  left: 64px;
+}
+#ui-perk-10 {
+  bottom: 144px;
+  left: 4px;
+}
+#ui-perk-11 {
+  bottom: 144px;
+  right: 0px;
+}
+#ui-perk-12 {
+  bottom: 144px;
+  right: 60px;
+}
+#ui-perk-13 {
+  bottom: 144px;
+  right: 120px;
+}
+#ui-perk-14 {
+  bottom: 144px;
+  right: 180px;
+}
+#ui-perk-15 {
+  bottom: 144px;
+  right: 240px;
+}
+#ui-perk-16 {
+  bottom: 144px;
+  left: 124px;
+}
+#ui-perk-17 {
+  bottom: 144px;
+  left: 64px;
+}
+#ui-perk-18 {
+  bottom: 144px;
+  left: 4px;
+}
+#ui-perk-19 {
+  bottom: 144px;
+  right: 0px;
+}
+#ui-perk-20 {
+  bottom: 144px;
+  right: 60px;
+}
+#ui-perk-21 {
+  bottom: 144px;
+  right: 120px;
+}
+#ui-perk-22 {
+  bottom: 144px;
+  right: 180px;
+}
+#ui-perk-23 {
+  bottom: 144px;
+  right: 240px;
 }
 
 .ui-perk-no-drop {
