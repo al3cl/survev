@@ -1348,7 +1348,7 @@ export class Player extends BaseGameObject {
         "firepower",                // Firepower
         "gotw",                     // Gift of the Woods (restores health over time)
         "windwalk",                 // Windwalk
-        "rare_potato",              // Rare Potato
+        // "rare_potato",              // Rare Potato
         // "aoe_heal",                 // Mass Medicate
         "endless_ammo",             // Endless Ammo
         "steelskin",                // Cast Ironskin
