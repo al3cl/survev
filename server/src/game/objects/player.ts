@@ -1365,7 +1365,7 @@ export class Player extends BaseGameObject {
         "chambered",                // One In The Chamber
         "martyrdom",                // Martyrdom
         "targeting",                // High-Value Targets
-        "bonus_45",                 // .45 In The Chamber
+        // "bonus_45",                 // .45 In The Chamber
         // "broken_arrow",             // Broken Arrow
         "fabricate",                // Fabricate
         "self_revive",              // Revivify
