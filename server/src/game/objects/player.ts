@@ -2977,9 +2977,18 @@ export class Player extends BaseGameObject {
 
             // perk absorption
             for (const perk of this.perks) {
-                if (!killCreditSource.hasPerk(perk.type)) {
-                    killCreditSource.addPerk(perk.type, false);
-                }
+                if (killCreditSource.hasPerk(perk.type)) continue;
+
+                killCreditSource.addPerk(perk.type, false);
+
+                // send messages to client
+                const msg = new net.PickupMsg();
+                msg.type = net.PickupMsgType.Success;
+                msg.item = perk.type;
+                msg.count = 1;
+
+                killCreditSource.msgsToSend.push({ type: net.MsgType.Pickup, msg });
+                // TODO this could be problematic playing like 10 perk pickup sounds at once
             }
         }
 
