@@ -21,7 +21,7 @@ export const Constants = {
     PlayerMaxScale: 2,
     MapObjectMinScale: 0.125,
     MapObjectMaxScale: 2.5,
-    MaxPerks: 8,
+    MaxPerks: 40,
     MaxMapIndicators: 16,
 };
 
