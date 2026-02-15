@@ -2603,6 +2603,70 @@ img {
   bottom: 144px;
   right: 240px;
 }
+#ui-perk-24 {
+  bottom: 216px;
+  left: 124px;
+}
+#ui-perk-25 {
+  bottom: 216px;
+  left: 64px;
+}
+#ui-perk-26 {
+  bottom: 216px;
+  left: 4px;
+}
+#ui-perk-27 {
+  bottom: 216px;
+  right: 0px;
+}
+#ui-perk-28 {
+  bottom: 216px;
+  right: 60px;
+}
+#ui-perk-29 {
+  bottom: 216px;
+  right: 120px;
+}
+#ui-perk-30 {
+  bottom: 216px;
+  right: 180px;
+}
+#ui-perk-31 {
+  bottom: 216px;
+  right: 240px;
+}
+#ui-perk-32 {
+  bottom: 288px;
+  left: 124px;
+}
+#ui-perk-33 {
+  bottom: 288px;
+  left: 64px;
+}
+#ui-perk-34 {
+  bottom: 288px;
+  left: 4px;
+}
+#ui-perk-35 {
+  bottom: 288px;
+  right: 0px;
+}
+#ui-perk-36 {
+  bottom: 288px;
+  right: 60px;
+}
+#ui-perk-37 {
+  bottom: 288px;
+  right: 120px;
+}
+#ui-perk-38 {
+  bottom: 288px;
+  right: 180px;
+}
+#ui-perk-39 {
+  bottom: 288px;
+  right: 240px;
+}
 
 .ui-perk-no-drop {
   border: 2px solid transparent;
