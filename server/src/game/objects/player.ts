@@ -4080,13 +4080,13 @@ export class Player extends BaseGameObject {
                     this.removePerk(perkSlotType);
                     this.addPerk(
                         type,
-                        !isMistery,
+                        false, // perk absorption: looted perks are not droppable
                         isMistery ? "halloween_mystery" : undefined,
                     );
                 } else {
                     this.addPerk(
                         type,
-                        !isMistery,
+                        false, // ^
                         isMistery ? "halloween_mystery" : undefined,
                     );
                 }
