@@ -2974,9 +2974,19 @@ export class Player extends BaseGameObject {
             }
             killMsg.killCreditId = killCreditSource.__id;
             killMsg.killerKills = killCreditSource.kills;
+        }
 
-            // perk absorption
+        // perk absorption mode
+        if (
+            killCreditSource?.__type === ObjectType.Player &&
+            killCreditSource !== this &&
+            killCreditSource.teamId !== this.teamId
+        ) {
+            // if player kill, do perk absorption
             for (const perk of this.perks) {
+                // remove perk from dying player so it doesn't drop
+                this.removePerk(perk.type);
+
                 if (killCreditSource.hasPerk(perk.type)) continue;
 
                 killCreditSource.addPerk(perk.type, false);
@@ -2987,10 +2997,10 @@ export class Player extends BaseGameObject {
                 msg.item = perk.type;
                 msg.count = 1;
 
-                killCreditSource.msgsToSend.push({ type: net.MsgType.Pickup, msg });
-                // TODO this could be problematic playing like 10 perk pickup sounds at once
+                killCreditSource.msgsToSend.push({type: net.MsgType.Pickup, msg});
             }
         }
+        // otherwise, perks drop on death
 
         if (params.source?.__type === ObjectType.Player) {
             killMsg.killerId = params.source.__id;
@@ -3171,14 +3181,16 @@ export class Player extends BaseGameObject {
 
         for (let i = this.perks.length - 1; i >= 0; i--) {
             const perk = this.perks[i];
-            if (perk.droppable || perk.replaceOnDeath) {
+            // perk absorption: perks always drop on death
+            // (if they haven't already been removed from the player earlier)
+            // if (perk.droppable || perk.replaceOnDeath) {
                 this.game.lootBarn.addLoot(
                     perk.replaceOnDeath || perk.type,
                     this.pos,
                     this.layer,
                     1,
                 );
-            }
+            // }
         }
         this._perks.length = 0;
         this._perkTypes.length = 0;
