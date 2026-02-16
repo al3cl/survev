@@ -1359,7 +1359,7 @@ export class Player extends BaseGameObject {
         "field_medic",              // Combat Medic
         "tree_climbing",            // One With Nature
         "scavenger",                // Scavenger
-        "scavenger_adv",            // Master Scavenger
+        // "scavenger_adv",            // Master Scavenger
         "pirate",                   // Pirate's Bounty (extra loot with melee)
         // "hunted",                   // The Hunted
         "chambered",                // One In The Chamber
