@@ -2514,159 +2514,159 @@ img {
   }
 }
 
-/* TODO this will need to be done for mobile as well (@media section)
 /* this shit sucks btw */
 #ui-perk-0 {
-  left: 115px;
+  right: -180px;
 }
 #ui-perk-1 {
-  left: 58px;
+  right: -123px;
 }
 #ui-perk-2 {
-  left: 1px;
+  right: -66px;
 }
 #ui-perk-3 {
-  right: 0px;
+  right: -9px;
 }
 #ui-perk-4 {
-  right: 57px;
+  right: 48px;
 }
 #ui-perk-5 {
-  right: 114px;
+  right: 105px;
 }
 #ui-perk-6 {
-  right: 171px;
+  right: 162px;
 }
 #ui-perk-7 {
-  right: 228px;
+  bottom: 0px;
+  right: 219px;
 }
 #ui-perk-8 {
   bottom: 72px;
-  left: 115px;
+  right: -180px;
 }
 #ui-perk-9 {
   bottom: 72px;
-  left: 58px;
+  right: -123px;
 }
 #ui-perk-10 {
   bottom: 72px;
-  left: 1px;
+  right: -66px;
 }
 #ui-perk-11 {
   bottom: 72px;
-  right: 0px;
+  right: -9px;
 }
 #ui-perk-12 {
   bottom: 72px;
-  right: 57px;
+  right: 48px;
 }
 #ui-perk-13 {
   bottom: 72px;
-  right: 114px;
+  right: 105px;
 }
 #ui-perk-14 {
   bottom: 72px;
-  right: 171px;
+  right: 162px;
 }
 #ui-perk-15 {
   bottom: 72px;
-  right: 228px;
+  right: 219px;
 }
 #ui-perk-16 {
   bottom: 144px;
-  left: 115px;
+  right: -180px;
 }
 #ui-perk-17 {
   bottom: 144px;
-  left: 58px;
+  right: -123px;
 }
 #ui-perk-18 {
   bottom: 144px;
-  left: 1px;
+  right: -66px;
 }
 #ui-perk-19 {
   bottom: 144px;
-  right: 0px;
+  right: -9px;
 }
 #ui-perk-20 {
   bottom: 144px;
-  right: 57px;
+  right: 48px;
 }
 #ui-perk-21 {
   bottom: 144px;
-  right: 114px;
+  right: 105px;
 }
 #ui-perk-22 {
   bottom: 144px;
-  right: 171px;
+  right: 162px;
 }
 #ui-perk-23 {
   bottom: 144px;
-  right: 228px;
+  right: 219px;
 }
 #ui-perk-24 {
   bottom: 216px;
-  left: 115px;
+  right: -180px;
 }
 #ui-perk-25 {
   bottom: 216px;
-  left: 58px;
+  right: -123px;
 }
 #ui-perk-26 {
   bottom: 216px;
-  left: 1px;
+  right: -66px;
 }
 #ui-perk-27 {
   bottom: 216px;
-  right: 0px;
+  right: -9px;
 }
 #ui-perk-28 {
   bottom: 216px;
-  right: 57px;
+  right: 48px;
 }
 #ui-perk-29 {
   bottom: 216px;
-  right: 114px;
+  right: 105px;
 }
 #ui-perk-30 {
   bottom: 216px;
-  right: 171px;
+  right: 162px;
 }
 #ui-perk-31 {
   bottom: 216px;
-  right: 228px;
+  right: 219px;
 }
 #ui-perk-32 {
   bottom: 288px;
-  left: 115px;
+  right: -180px;
 }
 #ui-perk-33 {
   bottom: 288px;
-  left: 58px;
+  right: -123px;
 }
 #ui-perk-34 {
   bottom: 288px;
-  left: 1px;
+  right: -66px;
 }
 #ui-perk-35 {
   bottom: 288px;
-  right: 0px;
+  right: -9px;
 }
 #ui-perk-36 {
   bottom: 288px;
-  right: 57px;
+  right: 48px;
 }
 #ui-perk-37 {
   bottom: 288px;
-  right: 114px;
+  right: 105px;
 }
 #ui-perk-38 {
   bottom: 288px;
-  right: 171px;
+  right: 162px;
 }
 #ui-perk-39 {
   bottom: 288px;
-  right: 228px;
+  right: 219px;
 }
 
 .ui-perk-no-drop {
@@ -4729,12 +4729,157 @@ span.ui-stats-header-value {
     bottom: 6px;
   }
 
-  #ui-perk-2 {
-    right: 30px;
+  #ui-perk-0 {
+    right: -55px;
   }
-
+  #ui-perk-1 {
+    right: -25px;
+  }
+  #ui-perk-2 {
+    right: 5px;
+  }
   #ui-perk-3 {
-    right: 60px;
+    right: 35px;
+  }
+  #ui-perk-4 {
+    right: 65px;
+  }
+  #ui-perk-5 {
+    right: 95px;
+  }
+  #ui-perk-6 {
+    right: 125px;
+  }
+  #ui-perk-7 {
+    right: 155px;
+  }
+  #ui-perk-8 {
+    bottom: 0px;
+    right: 185px;
+  }
+  #ui-perk-9 {
+    bottom: 0px;
+    right: 215px;
+  }
+  #ui-perk-10 {
+    bottom: 35px;
+    right: -55px;
+  }
+  #ui-perk-11 {
+    bottom: 35px;
+    right: -25px;
+  }
+  #ui-perk-12 {
+    bottom: 35px;
+    right: 5px;
+  }
+  #ui-perk-13 {
+    bottom: 35px;
+    right: 35px;
+  }
+  #ui-perk-14 {
+    bottom: 35px;
+    right: 65px;
+  }
+  #ui-perk-15 {
+    bottom: 35px;
+    right: 95px;
+  }
+  #ui-perk-16 {
+    bottom: 35px;
+    right: 125px;
+  }
+  #ui-perk-17 {
+    bottom: 35px;
+    right: 155px;
+  }
+  #ui-perk-18 {
+    bottom: 35px;
+    right: 185px;
+  }
+  #ui-perk-19 {
+    bottom: 35px;
+    right: 215px;
+  }
+  #ui-perk-20 {
+    bottom: 70px;
+    right: -55px;
+  }
+  #ui-perk-21 {
+    bottom: 70px;
+    right: -25px;
+  }
+  #ui-perk-22 {
+    bottom: 70px;
+    right: 5px;
+  }
+  #ui-perk-23 {
+    bottom: 70px;
+    right: 35px;
+  }
+  #ui-perk-24 {
+    bottom: 70px;
+    right: 65px;
+  }
+  #ui-perk-25 {
+    bottom: 70px;
+    right: 95px;
+  }
+  #ui-perk-26 {
+    bottom: 70px;
+    right: 125px;
+  }
+  #ui-perk-27 {
+    bottom: 70px;
+    right: 155px;
+  }
+  #ui-perk-28 {
+    bottom: 70px;
+    right: 185px;
+  }
+  #ui-perk-29 {
+    bottom: 70px;
+    right: 215px;
+  }
+  #ui-perk-30 {
+    bottom: 105px;
+    right: -55px;
+  }
+  #ui-perk-31 {
+    bottom: 105px;
+    right: -25px;
+  }
+  #ui-perk-32 {
+    bottom: 105px;
+    right: 5px;
+  }
+  #ui-perk-33 {
+    bottom: 105px;
+    right: 35px;
+  }
+  #ui-perk-34 {
+    bottom: 105px;
+    right: 65px;
+  }
+  #ui-perk-35 {
+    bottom: 105px;
+    right: 95px;
+  }
+  #ui-perk-36 {
+    bottom: 105px;
+    right: 125px;
+  }
+  #ui-perk-37 {
+    bottom: 105px;
+    right: 155px;
+  }
+  #ui-perk-38 {
+    bottom: 105px;
+    right: 185px;
+  }
+  #ui-perk-39 {
+    bottom: 105px;
+    right: 215px;
   }
 
   /**
