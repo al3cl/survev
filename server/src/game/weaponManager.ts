@@ -819,9 +819,8 @@ export class WeaponManager {
                 for (let i = 0; i < level; i++) {
                     damageMult *= PerkProperties.ammoBonusDamageMult;
                 }
-                // maximum multiplier possible here is 1.25^5 ~ 3.05
+                // maximum multiplier possible here is 1.08^5 ~ 1.469
                 // if player has bonus_assault, treat_super, bonus_9mm, treat_9mm, and last breath active
-                // lmao
             } else {
                 // regular effect:
                 // flat damage multiplier if player has > 0 of (ammo bonus perk, okami bar, hollow points)
