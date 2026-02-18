@@ -2952,8 +2952,8 @@ export class Player extends BaseGameObject {
             }
 
             // remove perks from dying player so they don't drop
-            for (let i = 0; i < this.perks.length; i++) {
-                this.removePerk(this.perks[i].type);
+            while (this.perks.length > 0) {
+                this.removePerk(this.perks[0].type);
             }
         }
         // otherwise, perks drop on death
@@ -3137,16 +3137,14 @@ export class Player extends BaseGameObject {
 
         for (let i = this.perks.length - 1; i >= 0; i--) {
             const perk = this.perks[i];
-            // perk absorption: perks always drop on death
-            // (if they haven't already been removed from the player earlier)
-            // if (perk.droppable || perk.replaceOnDeath) {
+            if (perk.droppable || perk.replaceOnDeath) {
                 this.game.lootBarn.addLoot(
                     perk.replaceOnDeath || perk.type,
                     this.pos,
                     this.layer,
                     1,
                 );
-            // }
+            }
         }
         this._perks.length = 0;
         this._perkTypes.length = 0;
