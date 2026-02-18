@@ -4023,7 +4023,7 @@ export class Player extends BaseGameObject {
                 const modeIsPerkAbsorption = !!this.game.map.mapDef.gameMode.perkAbsorption;
 
                 const emoteType = `emote_${type}`;
-                if (GameObjectDefs[`emote_${type}`] && modeIsPerkAbsorption) {
+                if (GameObjectDefs[`emote_${type}`] && !modeIsPerkAbsorption) {
                     this.game.playerBarn.addEmote(emoteType, this.__id);
                 }
 
