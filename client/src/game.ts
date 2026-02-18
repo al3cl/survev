@@ -1587,9 +1587,9 @@ export class Game {
                 if (msg.type == net.PickupMsgType.Success && msg.item) {
                     const itemDef = GameObjectDefs[msg.item];
 
-                    // for perk absorption mode
                     // ensure we're not playing 10 pickup sounds at once
                     // instead we spread them out
+                    // (specifically for perk absorption mode but applies everywhere)
                     if (itemDef && itemDef.type == "perk") {
                         this.m_activePlayer.perkPickupsLeft++;
                         break;

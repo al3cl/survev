@@ -2929,6 +2929,7 @@ export class Player extends BaseGameObject {
 
         // perk absorption mode
         if (
+            !!this.game.map.mapDef.gameMode.perkAbsorption &&
             killCreditSource?.__type === ObjectType.Player &&
             killCreditSource !== this &&
             killCreditSource.teamId !== this.teamId
@@ -4021,8 +4022,10 @@ export class Player extends BaseGameObject {
                     break;
                 }
 
+                const modeIsPerkAbsorption = !!this.game.map.mapDef.gameMode.perkAbsorption;
+
                 const emoteType = `emote_${type}`;
-                if (GameObjectDefs[`emote_${type}`] && !!this.game.map.mapDef.gameMode.perkAbsorption) {
+                if (GameObjectDefs[`emote_${type}`] && modeIsPerkAbsorption) {
                     this.game.playerBarn.addEmote(emoteType, this.__id);
                 }
 
@@ -4035,13 +4038,13 @@ export class Player extends BaseGameObject {
                     this.removePerk(perkSlotType);
                     this.addPerk(
                         type,
-                        false, // perk absorption: looted perks are not droppable
+                        !isMistery && !modeIsPerkAbsorption, // looted perks are not droppable in perk absorption
                         isMistery ? "halloween_mystery" : undefined,
                     );
                 } else {
                     this.addPerk(
                         type,
-                        false, // ^
+                        !isMistery && !modeIsPerkAbsorption, // ^
                         isMistery ? "halloween_mystery" : undefined,
                     );
                 }

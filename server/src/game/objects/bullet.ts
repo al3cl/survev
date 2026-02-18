@@ -617,15 +617,20 @@ export class Bullet {
 
                     let multiplier = 1;
                     if (isHighValueTarget) {
-                        // for perk absorption mode:
-                        // 5% damage bonus per each perk above 1 the opponent has
-                        // e.g.
-                        // 0, 1 perk = no buff
-                        // 2 perks = +5%
-                        // 6 perks = +25%
-                        // 10 perks = +45%
-                        let bonus = 1 + (col.player!.perks.length - 1) * 0.05
-                        multiplier *= bonus;
+                        if (!!col.player!.game.map.mapDef.gameMode.perkAbsorption) {
+                            // in perk absorption mode:
+                            // 5% damage bonus per each perk above 1 the opponent has
+                            // e.g.
+                            // 0, 1 perk = no buff
+                            // 2 perks = +5%
+                            // 6 perks = +25%
+                            // 10 perks = +45%
+                            let bonus = 1 + (col.player!.perks.length - 1) * 0.05
+                            multiplier *= bonus;
+                        } else {
+                            // regular effect: 25% damage bonus if opponent has > 0 perks
+                            multiplier *= 1.25;
+                        }
                     }
 
                     this.bulletManager.damages.push({

@@ -877,6 +877,7 @@ export class Player implements AbstractObject {
         this.m_updatePerks(isActivePlayer, isSpectating, ui2Manager);
 
         // spread out perk pickup sounds
+        // (specifically for perk absorption mode but applies everywhere)
         if (this.perkPickupsLeft > 0) {
             this.perkPickupTicker -= dt;
             if (this.perkPickupTicker < 0) {
