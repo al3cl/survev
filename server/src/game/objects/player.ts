@@ -2983,21 +2983,25 @@ export class Player extends BaseGameObject {
             killCreditSource.teamId !== this.teamId
         ) {
             // if player kill, do perk absorption
-            for (const perk of this.perks) {
-                // remove perk from dying player so it doesn't drop
-                this.removePerk(perk.type);
+            for (let i = 0; i < this.perks.length; i++) {
+                const perkType = this.perks[i].type;
 
-                if (killCreditSource.hasPerk(perk.type)) continue;
+                if (killCreditSource.hasPerk(perkType)) continue;
 
-                killCreditSource.addPerk(perk.type, false);
+                killCreditSource.addPerk(perkType, false);
 
                 // send messages to client
                 const msg = new net.PickupMsg();
                 msg.type = net.PickupMsgType.Success;
-                msg.item = perk.type;
+                msg.item = perkType;
                 msg.count = 1;
 
                 killCreditSource.msgsToSend.push({type: net.MsgType.Pickup, msg});
+            }
+
+            // remove perks from dying player so they don't drop
+            for (let i = 0; i < this.perks.length; i++) {
+                this.removePerk(this.perks[i].type);
             }
         }
         // otherwise, perks drop on death
