@@ -15,6 +15,9 @@ const mapDef: PartialMapDef = {
     assets: {
         atlases: ["gradient", "loadout", "shared", "main", "perk_absorption"],
     },
+    gameMode: {
+        perkAbsorption: true,
+    },
     lootTable: {
         tier_perk_absorption_perks: [
             { name: "leadership", count: 1, weight: 1 },
