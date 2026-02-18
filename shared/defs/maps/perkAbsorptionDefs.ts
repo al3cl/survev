@@ -61,7 +61,7 @@ const mapDef: PartialMapDef = {
             { name: "treat_556", count: 1, weight: 1 },
             { name: "treat_762", count: 1, weight: 1 },
             { name: "treat_super", count: 1, weight: 1 },
-            { name: "turkey_shoot", count: 1, weight: 1 },
+            // { name: "turkey_shoot", count: 1, weight: 1 },
         ],
     },
     mapGen: {
