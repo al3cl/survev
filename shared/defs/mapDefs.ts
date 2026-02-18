@@ -18,6 +18,7 @@ import { Woods } from "./maps/woodsDefs";
 import { WoodsSnow } from "./maps/woodsSnowDefs";
 import { WoodsSpring } from "./maps/woodsSpringDefs";
 import { WoodsSummer } from "./maps/woodsSummerDefs";
+import {PerkAbsorption} from "./maps/perkAbsorptionDefs.ts";
 import type { MapId } from "./types/misc";
 
 export type Atlas =
@@ -55,6 +56,8 @@ export const MapDefs = {
     turkey: Turkey,
     birthday: Birthday,
     beach: Beach,
+
+    perk_absorption: PerkAbsorption,
 
     /* STRIP_FROM_PROD_CLIENT:START */
     test_normal: testNormal,
