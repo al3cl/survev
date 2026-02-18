@@ -30750,7 +30750,7 @@ export const MapObjectDefs: Record<string, MapObjectDef> = {
         loot: [
             tierLoot("tier_perk_absorption_perks", 1, 1),
         ],
-        map: { display: false, color: 0x496f, scale: 0.875 },
+        map: { display: true, color: 0x496f, scale: 0.875 },
         terrain: { grass: true, beach: false },
         img: { sprite: "map-crate-21.img" },
         sound: { explode: "crate_break_01" },

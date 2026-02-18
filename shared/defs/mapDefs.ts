@@ -35,7 +35,10 @@ export type Atlas =
     | "cobalt"
     | "savannah"
     | "turkey"
-    | "beach";
+    | "beach"
+
+    | "perk_absorption"
+    ;
 
 export const MapDefs = {
     main: Main,
