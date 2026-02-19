@@ -2928,35 +2928,35 @@ export class Player extends BaseGameObject {
         }
 
         // perk absorption mode
-        if (
-            !!this.game.map.mapDef.gameMode.perkAbsorption &&
-            killCreditSource?.__type === ObjectType.Player &&
-            killCreditSource !== this &&
-            killCreditSource.teamId !== this.teamId
-        ) {
-            // if player kill, do perk absorption
-            for (let i = 0; i < this.perks.length; i++) {
-                const perkType = this.perks[i].type;
+        if (!!this.game.map.mapDef.gameMode.perkAbsorption) {
+            if (
+                killCreditSource?.__type === ObjectType.Player &&
+                killCreditSource !== this &&
+                killCreditSource.teamId !== this.teamId
+            ) {
+                // if player kill, do perk absorption
+                for (let i = 0; i < this.perks.length; i++) {
+                    const perkType = this.perks[i].type;
 
-                if (killCreditSource.hasPerk(perkType)) continue;
+                    if (killCreditSource.hasPerk(perkType)) continue;
 
-                killCreditSource.addPerk(perkType, false);
+                    killCreditSource.addPerk(perkType, false);
 
-                // send messages to client
-                const msg = new net.PickupMsg();
-                msg.type = net.PickupMsgType.Success;
-                msg.item = perkType;
-                msg.count = 1;
+                    // send messages to client
+                    const msg = new net.PickupMsg();
+                    msg.type = net.PickupMsgType.Success;
+                    msg.item = perkType;
+                    msg.count = 1;
 
-                killCreditSource.msgsToSend.push({type: net.MsgType.Pickup, msg});
-            }
-
-            // remove perks from dying player so they don't drop
-            while (this.perks.length > 0) {
-                this.removePerk(this.perks[0].type);
+                    killCreditSource.msgsToSend.push({type: net.MsgType.Pickup, msg});
+                }
+            } else {
+                // otherwise, perks drop on death
+                for (let i = 0; i < this.perks.length; i++) {
+                    this._perks[i].droppable = true;
+                }
             }
         }
-        // otherwise, perks drop on death
 
         if (params.source?.__type === ObjectType.Player) {
             killMsg.killerId = params.source.__id;
