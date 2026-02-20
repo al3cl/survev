@@ -2,7 +2,6 @@ import {util} from "../../utils/util";
 import type { MapDef } from "../mapDefs";
 import { MapId } from "../types/misc";
 import {Main, PartialMapDef} from "./baseDefs.ts";
-import {v2} from "../../utils/v2.ts";
 
 const mapDef: PartialMapDef = {
     mapId: MapId.PerkAbsorption,
@@ -69,31 +68,6 @@ const mapDef: PartialMapDef = {
     },
     mapGen: {
         // arrays dont merge so we have to copy the whole darn thing
-        densitySpawns: [
-            {
-                stone_01: 350,
-                barrel_01: 76,
-                silo_01: 8,
-                crate_01: 50,
-                crate_02: 4,
-                crate_03: 8,
-                bush_01: 78,
-                cache_06: 12,
-                tree_01: 320,
-                tree_13: 30,
-                hedgehog_01: 24,
-                container_01: 5,
-                container_02: 5,
-                container_03: 5,
-                container_04: 5,
-                shack_01: 7,
-                outhouse_01: 5,
-                loot_tier_1: 24,
-                loot_tier_beach: 4,
-
-                // gg_perk_crate: 30,
-            },
-        ],
         fixedSpawns: [
             {
                 // small is spawn count for solos and duos, large is spawn count for squads
@@ -128,17 +102,9 @@ const mapDef: PartialMapDef = {
                 },
                 stone_04: 1,
 
-                gg_perk_crate: { small: 43, large: 50 },
+                crate_perk_absorption: { small: 43, large: 50 },
             },
         ],
-        // randomSpawns: [],
-        // spawnReplacements: [
-        //     {
-        //         tree_01: "tree_01sv",
-        //         bush_01: "bush_01sv",
-        //         stone_03: "stone_03sv",
-        //     },
-        // ],
     },
 };
 

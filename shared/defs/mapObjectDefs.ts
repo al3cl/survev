@@ -30745,7 +30745,7 @@ export const MapObjectDefs: Record<string, MapObjectDef> = {
         },
     },
 
-    gg_perk_crate: createCrate({
+    crate_perk_absorption: createCrate({
         health: 140,
         loot: [
             tierLoot("tier_perk_absorption_perks", 1, 1),
