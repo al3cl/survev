@@ -30749,6 +30749,7 @@ export const MapObjectDefs: Record<string, MapObjectDef> = {
         health: 140,
         loot: [
             tierLoot("tier_perk_absorption_perks", 1, 1),
+            autoLoot("soda", 1),
         ],
         // map: { display: true, color: 0x49006f, scale: 0.875 },
         map: { display: true, color: 0x7100ad, scale: 0.875 },
