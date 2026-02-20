@@ -91,7 +91,7 @@ const mapDef: PartialMapDef = {
                 loot_tier_1: 24,
                 loot_tier_beach: 4,
 
-                gg_perk_crate: 23,
+                // gg_perk_crate: 30,
             },
         ],
         fixedSpawns: [
@@ -127,6 +127,8 @@ const mapDef: PartialMapDef = {
                     large: 2,
                 },
                 stone_04: 1,
+
+                gg_perk_crate: { small: 43, large: 50 },
             },
         ],
         // randomSpawns: [],
