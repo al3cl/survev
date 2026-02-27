@@ -681,6 +681,25 @@ export class WeaponManager {
         return false;
     }
 
+    // similar to the function above, but allows for effect stacking
+    bulletSaturationLevel(ammo: string): number {
+        let level = 0;
+
+        if (this.player.lastBreathActive) level++;
+        if (this.player.hasPerk("bonus_assault")) level++;
+        if (this.player.hasPerk("treat_super")) level++;
+
+        if (PerkProperties.ammoBonuses[ammo]) {
+            for (const perk of this.player.perks) {
+                if (PerkProperties.ammoBonuses[ammo].includes(perk.type)) {
+                    level++;
+                }
+            }
+        }
+
+        return level;
+    }
+
     fireWeapon(offHand: boolean, forceFire?: boolean) {
         const itemDef = GameObjectDefs[this.activeWeapon] as GunDef;
 
@@ -791,7 +810,22 @@ export class WeaponManager {
 
         const saturated = this.isBulletSaturated(itemDef.ammo);
         if (saturated) {
-            damageMult *= PerkProperties.ammoBonusDamageMult;
+            if (this.player.game.map.mapDef.gameMode.perkAbsorption) {
+                // in perk absorption mode:
+                // damage-boosting perks stack
+
+                // im fine with running all the checks twice tbh
+                let level = this.bulletSaturationLevel(itemDef.ammo);
+                for (let i = 0; i < level; i++) {
+                    damageMult *= PerkProperties.ammoBonusDamageMult;
+                }
+                // maximum multiplier possible here is 1.08^5 ~ 1.469
+                // if player has bonus_assault, treat_super, bonus_9mm, treat_9mm, and last breath active
+            } else {
+                // regular effect:
+                // flat damage multiplier if player has > 0 of (ammo bonus perk, okami bar, hollow points)
+                damageMult *= PerkProperties.ammoBonusDamageMult;
+            }
         }
 
         if (shouldApplyChambered) {
@@ -1161,9 +1195,9 @@ export class WeaponManager {
         if (!this.cookingThrowable) return;
         this.cookingThrowable = false;
 
-        if (this.cookTicker < GameConfig.player.cookTime) {
-            return;
-        }
+        // if (this.cookTicker < GameConfig.player.cookTime) {
+        //     return;
+        // }
 
         const oldThrowableType = this.weapons[GameConfig.WeaponSlot.Throwable].type;
         const amount = this.player.invManager.get(oldThrowableType as InventoryItem);

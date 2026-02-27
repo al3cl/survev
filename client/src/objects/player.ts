@@ -796,6 +796,12 @@ export class Player implements AbstractObject {
         return this.perkTypes.includes(type);
     }
 
+    // how many perks the player absorbed but hasn't yet heard the pickup sound for
+    perkPickupsLeft: number = 0;
+    perkPickupTicker: number = 0;
+    static readonly perkPickupSfxInterval: number = 0.08;
+    // 0.08 = fabricate giveInterval
+
     m_update(
         dt: number,
         playerBarn: PlayerBarn,
@@ -869,6 +875,25 @@ export class Player implements AbstractObject {
         // Should happen early in the frame so the rest of the update will have
         // accurate hasPerk() calls
         this.m_updatePerks(isActivePlayer, isSpectating, ui2Manager);
+
+        // spread out perk pickup sounds
+        // (specifically for perk absorption mode but applies everywhere)
+        if (this.perkPickupsLeft > 0) {
+            this.perkPickupTicker -= dt;
+            if (this.perkPickupTicker < 0) {
+                this.perkPickupTicker = Player.perkPickupSfxInterval;
+                this.perkPickupsLeft--;
+
+                // luckily, all pickup perk sounds are the same
+                audioManager.playSound("perk_pickup_01", {
+                    channel: "ui",
+                });
+
+                if (this.perkPickupsLeft === 0) {
+                    this.perkPickupTicker = 0;
+                }
+            }
+        }
 
         const weapTypeDirty = this.weapTypeOld != this.m_netData.m_activeWeapon;
         this.weapTypeOld = this.m_netData.m_activeWeapon;

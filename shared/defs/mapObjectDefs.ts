@@ -30744,4 +30744,17 @@ export const MapObjectDefs: Record<string, MapObjectDef> = {
             zIdx: 4,
         },
     },
+
+    crate_perk_absorption: createCrate({
+        health: 140,
+        loot: [
+            tierLoot("tier_perk_absorption_perks", 1, 1),
+            autoLoot("soda", 1),
+        ],
+        // map: { display: true, color: 0x49006f, scale: 0.875 },
+        map: { display: true, color: 0x7100ad, scale: 0.875 },
+        terrain: { grass: true, beach: false },
+        img: { sprite: "map-crate-ggbruh-perk.img" },
+        sound: { explode: "crate_break_01" },
+    }),
 };

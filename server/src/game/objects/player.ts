@@ -1426,6 +1426,10 @@ export class Player extends BaseGameObject {
             this.addPerk(perk.type, perk.droppable);
         }
 
+        // assign random perk on spawn
+        // const randomPerk = util.randomItem(Player.ALLOWED_SPAWN_PERK_TYPES);
+        // this.addPerk(randomPerk!, false);
+
         for (const [item, amount] of Object.entries(defaultItems.inventory)) {
             this.invManager.set(item as InventoryItem, amount);
         }
@@ -2923,6 +2927,37 @@ export class Player extends BaseGameObject {
             killMsg.killerKills = killCreditSource.kills;
         }
 
+        // perk absorption mode
+        if (!!this.game.map.mapDef.gameMode.perkAbsorption) {
+            if (
+                killCreditSource?.__type === ObjectType.Player &&
+                killCreditSource !== this &&
+                killCreditSource.teamId !== this.teamId
+            ) {
+                // if player kill, do perk absorption
+                for (let i = 0; i < this.perks.length; i++) {
+                    const perkType = this.perks[i].type;
+
+                    if (killCreditSource.hasPerk(perkType)) continue;
+
+                    killCreditSource.addPerk(perkType, false);
+
+                    // send messages to client
+                    const msg = new net.PickupMsg();
+                    msg.type = net.PickupMsgType.Success;
+                    msg.item = perkType;
+                    msg.count = 1;
+
+                    killCreditSource.msgsToSend.push({type: net.MsgType.Pickup, msg});
+                }
+            } else {
+                // otherwise, perks drop on death
+                for (let i = 0; i < this.perks.length; i++) {
+                    this._perks[i].droppable = true;
+                }
+            }
+        }
+
         if (params.source?.__type === ObjectType.Player) {
             killMsg.killerId = params.source.__id;
         }
@@ -3985,8 +4020,10 @@ export class Player extends BaseGameObject {
                     break;
                 }
 
+                const modeIsPerkAbsorption = !!this.game.map.mapDef.gameMode.perkAbsorption;
+
                 const emoteType = `emote_${type}`;
-                if (GameObjectDefs[`emote_${type}`]) {
+                if (GameObjectDefs[`emote_${type}`] && !modeIsPerkAbsorption) {
                     this.game.playerBarn.addEmote(emoteType, this.__id);
                 }
 
@@ -3999,13 +4036,13 @@ export class Player extends BaseGameObject {
                     this.removePerk(perkSlotType);
                     this.addPerk(
                         type,
-                        !isMistery,
+                        !isMistery && !modeIsPerkAbsorption, // looted perks are not droppable in perk absorption
                         isMistery ? "halloween_mystery" : undefined,
                     );
                 } else {
                     this.addPerk(
                         type,
-                        !isMistery,
+                        !isMistery && !modeIsPerkAbsorption, // ^
                         isMistery ? "halloween_mystery" : undefined,
                     );
                 }

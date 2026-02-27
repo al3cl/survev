@@ -1585,11 +1585,21 @@ export class Game {
                 const msg = new net.PickupMsg();
                 msg.deserialize(stream);
                 if (msg.type == net.PickupMsgType.Success && msg.item) {
+                    const itemDef = GameObjectDefs[msg.item];
+
+                    // ensure we're not playing 10 pickup sounds at once
+                    // instead we spread them out
+                    // (specifically for perk absorption mode but applies everywhere)
+                    if (itemDef && itemDef.type == "perk") {
+                        this.m_activePlayer.perkPickupsLeft++;
+                        break;
+                    }
+
                     this.m_activePlayer.playItemPickupSound(
                         msg.item,
                         this.m_audioManager,
                     );
-                    const itemDef = GameObjectDefs[msg.item];
+
                     if (itemDef && itemDef.type == "xp") {
                         this.m_ui2Manager.addRareLootMessage(msg.item, true);
                     }

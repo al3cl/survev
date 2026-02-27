@@ -29,9 +29,9 @@ export function getConfig(isProduction: boolean, dir: string) {
         regions: {},
         proxies: {},
         modes: [
-            { mapName: "main", teamMode: TeamMode.Solo, enabled: true },
-            { mapName: "main", teamMode: TeamMode.Duo, enabled: true },
-            { mapName: "main", teamMode: TeamMode.Squad, enabled: true },
+            { mapName: "perk_absorption", teamMode: TeamMode.Solo, enabled: true },
+            { mapName: "perk_absorption", teamMode: TeamMode.Duo, enabled: true },
+            { mapName: "perk_absorption", teamMode: TeamMode.Squad, enabled: true },
         ],
         clientTheme: "main",
         gameTps: 100,

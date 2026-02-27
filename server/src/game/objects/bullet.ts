@@ -617,7 +617,19 @@ export class Bullet {
 
                     let multiplier = 1;
                     if (isHighValueTarget) {
-                        multiplier *= 1.25;
+                        if (!!col.player!.game.map.mapDef.gameMode.perkAbsorption) {
+                            // in perk absorption mode:
+                            // 5% damage bonus per each perk the opponent has
+                            // e.g.
+                            // 0 perk = no buff
+                            // 3 perks = +15%
+                            // 14 perks = +70%
+                            let bonus = 1 + col.player!.perks.length * 0.05;
+                            multiplier *= bonus;
+                        } else {
+                            // regular effect: 25% damage bonus if opponent has > 0 perks
+                            multiplier *= 1.25;
+                        }
                     }
 
                     this.bulletManager.damages.push({
