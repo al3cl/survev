@@ -810,7 +810,7 @@ export class WeaponManager {
 
         const saturated = this.isBulletSaturated(itemDef.ammo);
         if (saturated) {
-            if (this.player.game.map.mapDef.gameMode.perkAbsorption) {
+            if (this.player.game.map.mapDef.gameMode.doPerkAbsorption) {
                 // in perk absorption mode:
                 // damage-boosting perks stack additively
                 // e.g. bonus_9mm + treat_9mm + treat_super = 1 + 3(0.08) = 24% dmg increase to 9mm
@@ -1195,9 +1195,11 @@ export class WeaponManager {
         if (!this.cookingThrowable) return;
         this.cookingThrowable = false;
 
-        // if (this.cookTicker < GameConfig.player.cookTime) {
-        //     return;
-        // }
+        // nade oc
+        if (this.cookTicker < GameConfig.player.cookTime &&
+            !this.player.game.map.mapDef.gameMode.doNadeOC) {
+            return;
+        }
 
         const oldThrowableType = this.weapons[GameConfig.WeaponSlot.Throwable].type;
         const amount = this.player.invManager.get(oldThrowableType as InventoryItem);

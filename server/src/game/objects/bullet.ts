@@ -617,7 +617,7 @@ export class Bullet {
 
                     let multiplier = 1;
                     if (isHighValueTarget) {
-                        if (!!col.player!.game.map.mapDef.gameMode.perkAbsorption) {
+                        if (!!col.player!.game.map.mapDef.gameMode.doPerkAbsorption) {
                             // in perk absorption mode:
                             // 2% damage bonus per each perk the opponent has
                             // e.g.

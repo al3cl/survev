@@ -2680,7 +2680,8 @@ export class Player extends BaseGameObject {
             const gameSourceDef = GameObjectDefs[params.gameSourceType ?? ""];
             let isHeadShot = false;
 
-            if (gameSourceDef && "headshotMult" in gameSourceDef && !params.isExplosion) {
+            if (gameSourceDef && "headshotMult" in gameSourceDef && !params.isExplosion &&
+                !this.game.map.mapDef.gameMode.removeHeadshots) {
                 isHeadShot = Math.random() < GameConfig.player.headshotChance;
 
                 if (isHeadShot) {
@@ -2928,7 +2929,7 @@ export class Player extends BaseGameObject {
         }
 
         // perk absorption mode
-        if (!!this.game.map.mapDef.gameMode.perkAbsorption) {
+        if (!!this.game.map.mapDef.gameMode.doPerkAbsorption) {
             if (
                 killCreditSource?.__type === ObjectType.Player &&
                 killCreditSource !== this &&
@@ -4020,7 +4021,7 @@ export class Player extends BaseGameObject {
                     break;
                 }
 
-                const modeIsPerkAbsorption = !!this.game.map.mapDef.gameMode.perkAbsorption;
+                const modeIsPerkAbsorption = !!this.game.map.mapDef.gameMode.doPerkAbsorption;
 
                 const emoteType = `emote_${type}`;
                 if (GameObjectDefs[`emote_${type}`] && !modeIsPerkAbsorption) {

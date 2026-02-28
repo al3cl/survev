@@ -15,7 +15,8 @@ const mapDef: PartialMapDef = {
         atlases: ["gradient", "loadout", "shared", "main", "perk_absorption"],
     },
     gameMode: {
-        perkAbsorption: true,
+        doPerkAbsorption: true,
+        doNadeOC: true,
     },
     lootTable: {
         tier_perk_absorption_perks: [
