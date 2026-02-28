@@ -681,7 +681,7 @@ export class WeaponManager {
         return false;
     }
 
-    // similar to the function above, but allows for effect stacking
+    // similar to the function above, but allows for damage stacking
     bulletSaturationLevel(ammo: string): number {
         let level = 0;
 
@@ -812,14 +812,14 @@ export class WeaponManager {
         if (saturated) {
             if (this.player.game.map.mapDef.gameMode.perkAbsorption) {
                 // in perk absorption mode:
-                // damage-boosting perks stack
+                // damage-boosting perks stack additively
+                // e.g. bonus_9mm + treat_9mm + treat_super = 1 + 3(0.08) = 24% dmg increase to 9mm
 
                 // im fine with running all the checks twice tbh
                 let level = this.bulletSaturationLevel(itemDef.ammo);
-                for (let i = 0; i < level; i++) {
-                    damageMult *= PerkProperties.ammoBonusDamageMult;
-                }
-                // maximum multiplier possible here is 1.08^5 ~ 1.469
+                let percentBonus = level * (PerkProperties.ammoBonusDamageMult - 1);
+                damageMult *= 1 + percentBonus;
+                // maximum multiplier possible here is 1 + 5(.08) = 1.40
                 // if player has bonus_assault, treat_super, bonus_9mm, treat_9mm, and last breath active
             } else {
                 // regular effect:

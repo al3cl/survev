@@ -25,7 +25,7 @@ const mapDef: PartialMapDef = {
             { name: "gotw", count: 1, weight: 1 },
             { name: "windwalk", count: 1, weight: 1 },
             // { name: "rare_potato", count: 1, weight: 1 },
-            // { name: "aoe_heal", count: 1, weight: 1 },
+            { name: "aoe_heal", count: 1, weight: 1 },
             { name: "endless_ammo", count: 1, weight: 1 },
             { name: "steelskin", count: 1, weight: 1 },
             { name: "ap_rounds", count: 1, weight: 1 },
@@ -65,6 +65,11 @@ const mapDef: PartialMapDef = {
             { name: "treat_super", count: 1, weight: 1 },
             // { name: "turkey_shoot", count: 1, weight: 1 },
         ],
+        tier_perk_crate_adren: [
+            { name: "", count: 1, weight: 2 },
+            { name: "soda", count: 1, weight: 1 },
+            { name: "painkiller", count: 1, weight: 1 },
+        ],
     },
     mapGen: {
         // arrays dont merge so we have to copy the whole darn thing
@@ -102,7 +107,7 @@ const mapDef: PartialMapDef = {
                 },
                 stone_04: 1,
 
-                crate_perk_absorption: { small: 43, large: 50 },
+                crate_perk_absorption: { small: 50, large: 60 },
             },
         ],
     },
