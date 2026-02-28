@@ -14,9 +14,9 @@ const mapDef: PartialMapDef = {
     // assets: {
     //     atlases: ["gradient", "loadout", "shared", "main"],
     // },
-    // gameMode: {
-    //     perkAbsorption: true,
-    // },
+    gameMode: {
+        doNadeOC: true,
+    },
     // lootTable: {
     //     // ...
     // },

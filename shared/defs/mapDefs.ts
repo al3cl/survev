@@ -125,7 +125,8 @@ export interface MapDef {
         turkeyMode?: boolean;
         spookyKillSounds?: boolean;
 
-        perkAbsorption?: boolean;
+        doPerkAbsorption?: boolean;
+        doNadeOC?: boolean;
     };
     gameConfig: {
         planes: {

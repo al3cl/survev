@@ -2928,7 +2928,7 @@ export class Player extends BaseGameObject {
         }
 
         // perk absorption mode
-        if (!!this.game.map.mapDef.gameMode.perkAbsorption) {
+        if (!!this.game.map.mapDef.gameMode.doPerkAbsorption) {
             if (
                 killCreditSource?.__type === ObjectType.Player &&
                 killCreditSource !== this &&
@@ -4020,7 +4020,7 @@ export class Player extends BaseGameObject {
                     break;
                 }
 
-                const modeIsPerkAbsorption = !!this.game.map.mapDef.gameMode.perkAbsorption;
+                const modeIsPerkAbsorption = !!this.game.map.mapDef.gameMode.doPerkAbsorption;
 
                 const emoteType = `emote_${type}`;
                 if (GameObjectDefs[`emote_${type}`] && !modeIsPerkAbsorption) {
