@@ -12,6 +12,7 @@ export enum MapId {
     Birthday = 8,
     Beach = 9,
     PerkAbsorption = 100,
+    GGBRUHClassic = 101,
 }
 
 export const TeamModeToString = {
