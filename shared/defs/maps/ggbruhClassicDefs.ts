@@ -16,6 +16,7 @@ const mapDef: PartialMapDef = {
     // },
     gameMode: {
         doNadeOC: true,
+        removeHeadshots: true,
     },
     // lootTable: {
     //     // ...

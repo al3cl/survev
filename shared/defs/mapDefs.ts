@@ -127,6 +127,7 @@ export interface MapDef {
 
         doPerkAbsorption?: boolean;
         doNadeOC?: boolean;
+        removeHeadshots?: boolean;
     };
     gameConfig: {
         planes: {
