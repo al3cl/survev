@@ -85,6 +85,8 @@ export class Localization {
             this.translations[this.locale]?.[key] ||
             this.translations[this.locale]?.[spacedKey] ||
             this.translations["en"][key] ||
+            this.translations[this.locale]?.[key.split(":")[0]] ||
+                // ^ e.g. "game-p30l_dual:bal" will convert to "game-p30l_dual"
             ""
         );
     }

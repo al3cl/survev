@@ -1,3 +1,6 @@
+import {GunDef} from "./gunDefs.ts";
+import {DeepPartial, util} from "../../utils/util.ts";
+
 export interface BulletDef {
     readonly type: "bullet";
     damage: number;
@@ -798,4 +801,17 @@ export const BaseDefs: Record<string, BulletDef> = {
     },
 };
 
-export const BulletDefs: Record<string, BulletDef> = { ...BaseDefs };
+function defineBulletMod(baseType: string, params: DeepPartial<BulletDef>): BulletDef {
+    return util.mergeDeep({}, BaseDefs[baseType], params);
+}
+
+const ModDefs: Record<string, BulletDef> = {
+    "bullet_mosin:bal": defineBulletMod("bullet_mosin", {
+        damage: 67,
+    }),
+    "bullet_sv98:bal": defineBulletMod("bullet_sv98", {
+        damage: 74,
+    }),
+}
+
+export const BulletDefs: Record<string, BulletDef> = { ...BaseDefs, ...ModDefs };

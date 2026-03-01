@@ -3387,10 +3387,86 @@ const SkinDefs: Record<string, GunDef> = {
 // modified gun stats for specific modes
 // not compatible with potatoes
 const ModDefs: Record<string, GunDef> = {
-    m9_test: defineGunSkin("m9", {
-        name: "M9",
-        maxClip: 99,
-        maxReload: 99,
+    "vss:bal": defineGunSkin("vss", {
+        headshotMult: 1.5,
+        noPotatoSwap: true,
+    }),
+    "mk12:bal": defineGunSkin("mk12", {
+        headshotMult: 1.5,
+        noPotatoSwap: true,
+    }),
+    "l86:bal": defineGunSkin("l8g", {
+        headshotMult: 1.5,
+        noPotatoSwap: true,
+    }),
+    "scout:bal": defineGunSkin("scout", {
+        headshotMult: 1.25,
+        noPotatoSwap: true,
+    }),
+    "model94:bal": defineGunSkin("model94", {
+        headshotMult: 1.25,
+        noPotatoSwap: true,
+    }),
+    "mkg45:bal": defineGunSkin("mkg45", {
+        headshotMult: 1.5,
+        noPotatoSwap: true,
+    }),
+    "blr:bal": defineGunSkin("blr", {
+        headshotMult: 1.25,
+        noPotatoSwap: true,
+    }),
+    "mosin:bal": defineGunSkin("mosin", {
+        bulletType: "bullet_mosin:bal",
+        headshotMult: 1.15,
+        noPotatoSwap: true,
+    }),
+    "sv98:bal": defineGunSkin("sv98", {
+        bulletType: "bullet_sv98:bal",
+        headshotMult: 1.15,
+        noPotatoSwap: true,
+    }),
+    "m39:bal": defineGunSkin("m39", {
+        headshotMult: 1.5,
+        noPotatoSwap: true,
+    }),
+    "svd:bal": defineGunSkin("svd", {
+        headshotMult: 1.5,
+        noPotatoSwap: true,
+    }),
+    "garand:bal": defineGunSkin("garand", {
+        headshotMult: 1.5,
+        noPotatoSwap: true,
+    }),
+    "m870:bal": defineGunSkin("m870", {
+        headshotMult: 1.25,
+        noPotatoSwap: true,
+    }),
+    "mp220:bal": defineGunSkin("mp220", {
+        headshotMult: 1.25,
+        noPotatoSwap: true,
+    }),
+    "saiga:bal": defineGunSkin("saiga", {
+        headshotMult: 1.25,
+        noPotatoSwap: true,
+    }),
+    "spas12:bal": defineGunSkin("spas12", {
+        headshotMult: 1.25,
+        noPotatoSwap: true,
+    }),
+    "p30l:bal": defineGunSkin("p30l", {
+        headshotMult: 1.75,
+        noPotatoSwap: true,
+    }),
+    "p30l_dual:bal": defineGunSkin("p30l_dual", {
+        headshotMult: 1.75,
+        noPotatoSwap: true,
+    }),
+    "deagle:bal": defineGunSkin("deagle", {
+        headshotMult: 1.6,
+        noPotatoSwap: true,
+    }),
+    "deagle_dual:bal": defineGunSkin("deagle_dual", {
+        headshotMult: 1.6,
         noPotatoSwap: true,
     }),
 }
