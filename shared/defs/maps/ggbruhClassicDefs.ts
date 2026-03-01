@@ -29,7 +29,7 @@ const mapDef: PartialMapDef = {
             vss: "vss:bal",
             mk12: "mk12:bal",
             l86: "l86:bal",
-            scout: "scout:bal",
+            scout_elite: "scout_elite:bal",
             model94: "model94:bal",
             mkg45: "mkg45:bal",
             blr: "blr:bal",

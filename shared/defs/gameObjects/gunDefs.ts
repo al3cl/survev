@@ -3395,11 +3395,11 @@ const ModDefs: Record<string, GunDef> = {
         headshotMult: 1.5,
         noPotatoSwap: true,
     }),
-    "l86:bal": defineGunSkin("l8g", {
+    "l86:bal": defineGunSkin("l86", {
         headshotMult: 1.5,
         noPotatoSwap: true,
     }),
-    "scout:bal": defineGunSkin("scout", {
+    "scout_elite:bal": defineGunSkin("scout_elite", {
         headshotMult: 1.25,
         noPotatoSwap: true,
     }),
