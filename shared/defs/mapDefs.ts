@@ -245,4 +245,8 @@ export interface MapDef {
         spawnReplacements: [Record<string, string>];
         importantSpawns: string[];
     };
+    // in theory can work with any loot,
+    // but only allowed for guns rn since loot count doesn't change
+    // you can still replace a gun with any loot you want (count will be 1 tho)
+    gunReplacements: [Record<string, string>];
 }

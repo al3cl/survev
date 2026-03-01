@@ -105,6 +105,11 @@ export class LootBarn {
         pushSpeed?: number,
         dir?: Vec2,
     ) {
+        const gunReplacements = this.game.map.mapDef.gunReplacements[0];
+        if (gunReplacements[type] && GameObjectDefs[type].type === "gun") {
+            type = gunReplacements[type];
+        }
+
         const def = GameObjectDefs[type];
 
         if (!def || !("lootImg" in def)) {
@@ -127,6 +132,11 @@ export class LootBarn {
         preloadGun?: boolean,
         source?: "player" | "obstacle" | "map",
     ) {
+        const gunReplacements = this.game.map.mapDef.gunReplacements[0];
+        if (gunReplacements[type] && GameObjectDefs[type].type === "gun") {
+            type = gunReplacements[type];
+        }
+
         const def = GameObjectDefs[type];
 
         if (!def || !("lootImg" in def)) {

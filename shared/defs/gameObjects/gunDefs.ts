@@ -3384,4 +3384,15 @@ const SkinDefs: Record<string, GunDef> = {
     }),
 };
 
-export const GunDefs: Record<string, GunDef> = { ...BaseDefs, ...SkinDefs };
+// modified gun stats for specific modes
+// not compatible with potatoes
+const ModDefs: Record<string, GunDef> = {
+    m9_test: defineGunSkin("m9", {
+        name: "M9",
+        maxClip: 99,
+        maxReload: 99,
+        noPotatoSwap: true,
+    }),
+}
+
+export const GunDefs: Record<string, GunDef> = { ...BaseDefs, ...SkinDefs, ...ModDefs };

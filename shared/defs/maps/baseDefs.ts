@@ -854,6 +854,7 @@ export const Main: MapDef = {
         spawnReplacements: [{}],
         importantSpawns: ["club_complex_01"],
     },
+    gunReplacements: [{}],
     /* STRIP_FROM_PROD_CLIENT:END */
 };
 

@@ -24,6 +24,11 @@ const mapDef: PartialMapDef = {
     // mapGen: {
     //     // ...
     // },
+    gunReplacements: [
+        {
+            m9: "m9_test",
+        },
+    ],
 };
 
 export const GGBRUHClassic = util.mergeDeep({}, Main, mapDef) as MapDef;
