@@ -20,6 +20,7 @@ import { WoodsSpring } from "./maps/woodsSpringDefs";
 import { WoodsSummer } from "./maps/woodsSummerDefs";
 import {PerkAbsorption} from "./maps/perkAbsorptionDefs.ts";
 import type { MapId } from "./types/misc";
+import {GGBRUHClassic} from "./maps/ggbruhClassicDefs.ts";
 
 export type Atlas =
     | "gradient"
@@ -61,6 +62,7 @@ export const MapDefs = {
     beach: Beach,
 
     perk_absorption: PerkAbsorption,
+    ggbruh_classic: GGBRUHClassic,
 
     /* STRIP_FROM_PROD_CLIENT:START */
     test_normal: testNormal,
