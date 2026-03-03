@@ -1,9 +1,5 @@
 import { randomUUID } from "node:crypto";
-import {
-    GameObjectDefs,
-    type LootDef,
-    WeaponTypeToDefs,
-} from "../../../../shared/defs/gameObjectDefs";
+import { GameObjectDefs, type LootDef, WeaponTypeToDefs, } from "../../../../shared/defs/gameObjectDefs";
 import { type EmoteDef, EmotesDefs } from "../../../../shared/defs/gameObjects/emoteDefs";
 import {
     type BackpackDef,
@@ -24,6 +20,7 @@ import { UnlockDefs } from "../../../../shared/defs/gameObjects/unlockDefs";
 import {
     type Action,
     type Anim,
+    DamageType,
     EmoteSlot,
     GameConfig,
     type HasteType,
@@ -38,7 +35,7 @@ import { collider } from "../../../../shared/utils/collider";
 import type { Loadout } from "../../../../shared/utils/loadout";
 import { math } from "../../../../shared/utils/math";
 import { assert, util } from "../../../../shared/utils/util";
-import { type Vec2, v2 } from "../../../../shared/utils/v2";
+import { v2, type Vec2 } from "../../../../shared/utils/v2";
 import { Config } from "../../config";
 import { IDAllocator } from "../../utils/IDAllocator";
 import { validateUserName } from "../../utils/serverHelpers";
@@ -51,7 +48,7 @@ import { BaseGameObject, type DamageParams, type GameObject } from "./gameObject
 import type { Loot } from "./loot";
 import type { MapIndicator } from "./mapIndicator";
 import type { Obstacle } from "./obstacle";
-import {hashIp} from "../../api/routes/private/ModerationRouter.ts";
+import { hashIp } from "../../api/routes/private/ModerationRouter.ts";
 
 type MoveObjsMode = {
     enabled: boolean;
@@ -3192,6 +3189,26 @@ export class Player extends BaseGameObject {
                 )
             ) {
                 obj.onGoreRegionKill();
+            }
+        }
+
+        // hide n seek: if 0 or 1 hiders left now, kill all seekers
+        if (this.game.map.mapDef.gameMode.hideNSeek) {
+            let aliveHiderCount = this.game.playerBarn.livingPlayers.filter((player) =>
+                player.role === "hider"
+            ).length;
+            // only check if hider just died
+            if (this.role === "hider" && aliveHiderCount < 2) {
+                let aliveSeekers = this.game.playerBarn.livingPlayers.filter((player) =>
+                    player.role === "seeker"
+                );
+                let seekerKillParams: DamageParams = {
+                    damageType: DamageType.None,
+                    dir: v2.create(0, 0),
+                }
+                for (let i = 0; i < aliveSeekers.length; i++) {
+                    aliveSeekers[i].kill(seekerKillParams);
+                }
             }
         }
 

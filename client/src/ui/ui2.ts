@@ -12,13 +12,7 @@ import type { MeleeDef } from "../../../shared/defs/gameObjects/meleeDefs";
 import type { RoleDef } from "../../../shared/defs/gameObjects/roleDefs";
 import { MapObjectDefs } from "../../../shared/defs/mapObjectDefs";
 import type { ObstacleDef } from "../../../shared/defs/mapObjectsTyping";
-import {
-    Action,
-    DamageType,
-    GameConfig,
-    Input,
-    type InventoryItem,
-} from "../../../shared/gameConfig";
+import { Action, DamageType, GameConfig, Input, type InventoryItem, } from "../../../shared/gameConfig";
 import { PickupMsgType } from "../../../shared/net/net";
 import { collider } from "../../../shared/utils/collider";
 import { math } from "../../../shared/utils/math";
@@ -1453,6 +1447,10 @@ export class UiManager2 {
                 return `${this.localization.translate(
                     "game-the-air-strike",
                 )} ${killTxt} ${targetName}`;
+            }
+            case DamageType.None: {
+                const killTxt = this.localization.translate("game-died");
+                return `${targetName} ${killTxt}`;
             }
             default:
                 return "";
