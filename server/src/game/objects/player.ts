@@ -216,6 +216,14 @@ export class PlayerBarn {
 
         this.activatePlayer(player, group, team);
 
+        if (!!this.game.map.mapDef.gameMode.hideNSeek) {
+            if (finalName.startsWith("[SEEKER]")) {
+                player.promoteToRole("seeker");
+            } else {
+                player.promoteToRole("hider");
+            }
+        }
+
         return player;
     }
 

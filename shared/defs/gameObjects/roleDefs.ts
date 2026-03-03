@@ -556,4 +556,36 @@ export const RoleDefs: Record<string, RoleDef> = {
         guiImg: "img/gui/role-assault.svg",
         color: 0xffec17,
     },
+
+    hider: {
+        type: "role",
+        announce: false,
+        sound: {},
+    },
+    seeker: {
+        type: "role",
+        announce: false,
+        sound: {},
+        perks: ["leadership", "endless_ammo", "takedown"],
+        defaultItems: createDefaultItems({
+            outfit: "outfitDev",
+            weapons: [
+                { type: "m1014", ammo: 8 },
+                { type: "pkp", ammo: 200 },
+                { type: "bonesaw_healer", ammo: 0 },
+                { type: "mirv", ammo: 0 },
+            ],
+            helmet: "helmet03",
+            chest: "chest03",
+            backpack: "backpack03",
+            inventory: {
+                mirv: 5,
+                frag: 10,
+                strobe: 1,
+                "2xscope": 1,
+                "4xscope": 1,
+                "8xscope": 1,
+            },
+        }),
+    },
 };
