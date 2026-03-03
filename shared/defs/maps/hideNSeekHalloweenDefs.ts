@@ -36,8 +36,19 @@ const mapDef: PartialMapDef = {
     mapGen: {
         densitySpawns: [
             {
-                ...Halloween.mapGen.densitySpawns[0],
+                stone_01: 125,
+                barrel_01: 76,
+                crate_01: 120,
+                crate_02: 6,
                 crate_03: 8, // nade crates, may reduce rarity (default = 8)
+                bush_01: 90,
+                hedgehog_01: 12,
+                cache_pumpkin_01: 32,
+                cache_pumpkin_03: 32,
+                shack_01: 6,
+                outhouse_01: 6,
+                loot_tier_1: 48,
+                loot_tier_beach: 8,
             },
         ],
     },
