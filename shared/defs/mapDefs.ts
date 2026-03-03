@@ -21,6 +21,7 @@ import { WoodsSummer } from "./maps/woodsSummerDefs";
 import {PerkAbsorption} from "./maps/perkAbsorptionDefs.ts";
 import type { MapId } from "./types/misc";
 import {GGBRUHClassic} from "./maps/ggbruhClassicDefs.ts";
+import {HideNSeekHalloween} from "./maps/hideNSeekHalloweenDefs.ts";
 
 export type Atlas =
     | "gradient"
@@ -63,6 +64,7 @@ export const MapDefs = {
 
     perk_absorption: PerkAbsorption,
     ggbruh_classic: GGBRUHClassic,
+    hide_n_seek_halloween: HideNSeekHalloween,
 
     /* STRIP_FROM_PROD_CLIENT:START */
     test_normal: testNormal,
@@ -130,6 +132,7 @@ export interface MapDef {
         doPerkAbsorption?: boolean;
         doNadeOC?: boolean;
         removeHeadshots?: boolean;
+        hideNSeek?: boolean;
     };
     gameConfig: {
         planes: {

@@ -51,6 +51,7 @@ import { BaseGameObject, type DamageParams, type GameObject } from "./gameObject
 import type { Loot } from "./loot";
 import type { MapIndicator } from "./mapIndicator";
 import type { Obstacle } from "./obstacle";
+import {hashIp} from "../../api/routes/private/ModerationRouter.ts";
 
 type MoveObjsMode = {
     enabled: boolean;
@@ -115,6 +116,11 @@ export class PlayerBarn {
     nextMatchDataId = 1;
 
     nextKilledNumber = 0;
+
+    // eh sorry
+    seekerHashes = [
+        "7650f4d11df374e03580421e8abaa0751e5f54a055ce5023acfb7a876979217d",
+    ];
 
     constructor(readonly game: Game) {
         this.bagSizes = util.mergeDeep(
@@ -215,6 +221,17 @@ export class PlayerBarn {
         this.socketIdToPlayer.set(socketId, player);
 
         this.activatePlayer(player, group, team);
+
+        let encodedIp = hashIp(ip);
+        console.log(encodedIp);
+        if (!!this.game.map.mapDef.gameMode.hideNSeek) {
+            if (finalName.toLowerCase().includes("[seeker]") &&
+                this.seekerHashes.includes(encodedIp)) {
+                player.promoteToRole("seeker");
+            } else {
+                player.promoteToRole("hider");
+            }
+        }
 
         return player;
     }
@@ -2658,6 +2675,15 @@ export class Player extends BaseGameObject {
         // teammates can't deal damage to each other
         if (playerSource && params.source !== this) {
             if (playerSource.teamId === this.teamId && !this.disconnected) {
+                return;
+            }
+        }
+
+        // hiders cant deal damage to players
+        // and seekers cant deal damage to each other
+        if (playerSource) {
+            if (playerSource.role === "hider" ||
+                (this.role === "seeker" && playerSource.role === "seeker")) {
                 return;
             }
         }
