@@ -2677,11 +2677,9 @@ export class Player extends BaseGameObject {
             if (playerSource.teamId === this.teamId && !this.disconnected) {
                 return;
             }
-        }
 
-        // hiders cant deal damage to players
-        // and seekers cant deal damage to each other
-        if (playerSource) {
+            // hiders cant deal damage to other players
+            // and seekers cant deal damage to each other
             if (playerSource.role === "hider" ||
                 (this.role === "seeker" && playerSource.role === "seeker")) {
                 return;
