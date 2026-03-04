@@ -1207,6 +1207,27 @@ const SkinDefs: Record<string, OutfitDef> = {
             tint: 0xa9621d,
         },
     }),
+
+    outfitBruh: defineOutfitSkin("outfitBase", {
+        name: "Official [BRUH] Uniform",
+        noDropOnDeath: true,
+        skinImg: {
+            baseTint: 0xb2adfc,
+            baseSprite: "player-base-outfitDC.img",
+            handTint: 0xb2adfc,
+            handSprite: "player-hands-02.img",
+            footTint: 0xb2adfc,
+            footSprite: "player-feet-02.img",
+            backpackTint: 0xb2adfc,
+            backpackSprite: "player-circle-base-02.img",
+        },
+        lootImg: {
+            sprite: "loot-shirt-01.img",
+            tint: 0xb2adfc,
+        },
+        rarity: Rarity.Mythic,
+        lore: "BRUH ON TOP",
+    }),
 };
 
 export const OutfitDefs = { ...BaseDefs, ...SkinDefs };

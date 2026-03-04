@@ -568,7 +568,7 @@ export const RoleDefs: Record<string, RoleDef> = {
         sound: {},
         perks: ["leadership", "endless_ammo", "takedown"],
         defaultItems: createDefaultItems({
-            outfit: "outfitDev",
+            outfit: "outfitBruh",
             weapons: [
                 { type: "m1014", ammo: 8 },
                 { type: "pkp", ammo: 200 },
