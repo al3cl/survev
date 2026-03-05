@@ -528,21 +528,21 @@ export class Game {
     }
 
     calculatePoints(): void {
-        let pointsMap = this.map.mapDef.gameMode.points;
-        if (!pointsMap) return;
+        let pointsObj = this.map.mapDef.gameMode.points;
+        if (!pointsObj) return;
         const players = this.modeManager.getPlayersSortedByRank();
 
         const playerPoints = new Map<string, number>();
         let rank = 1;
         for (let i = 0; i < players.length; i++) {
             let player = players[i].player;
-            if (pointsMap.ignoreRoles?.includes(player.role)) {
+            if (pointsObj.ignoreRoles?.includes(player.role)) {
                 playerPoints.set(player.name, 0);
                 continue;
             }
             let points = 0;
-            points += player.kills * pointsMap.kill;
-            for (let p of pointsMap.placement) {
+            points += player.kills * pointsObj.kill;
+            for (let p of pointsObj.placement) {
                 if (rank <= p.top) {
                     points += p.points;
                 }
@@ -551,7 +551,13 @@ export class Game {
             rank++;
         }
 
-        // console.log("Player points: ", playerPoints);
+        // send points msg to all players
+        const playerPointsMsg = new net.PlayerPointsMsg();
+        playerPointsMsg.pointsMap = playerPoints;
+
+        for (let i = 0; i < players.length; i++) {
+            players[i].player.msgsToSend.push({ type: net.MsgType.PlayerPoints, msg: playerPointsMsg });
+        }
     }
 
     addJoinTokens(tokens: FindGamePrivateBody["playerData"], autoFill: boolean) {

@@ -1629,6 +1629,25 @@ export class Game {
                 const msg = new net.DisconnectMsg();
                 msg.deserialize(stream);
                 this.m_disconnectMsg = msg.reason;
+                break;
+            }
+
+            case net.MsgType.PlayerPoints: {
+                const msg = new net.PlayerPointsMsg();
+                msg.deserialize(stream);
+
+                // sort by point total
+                const pointsArr: Array<[string, number]> = Array.from(msg.pointsMap);
+                pointsArr.sort((a, b) => b[1] - a[1]);
+
+                // for now just console log this ts
+                let str = "";
+                for (let i = 0; i < pointsArr.length; i++) {
+                    str += pointsArr[i][0] + ": " + pointsArr[i][1] + "\n";
+                }
+                console.log(str);
+
+                break;
             }
         }
     }
