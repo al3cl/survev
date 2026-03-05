@@ -521,8 +521,37 @@ export class Game {
             // stop game after 1.8s
             this.stopTicker = 1.8;
 
+            this.calculatePoints();
+
             this.updateData();
         }
+    }
+
+    calculatePoints(): void {
+        let pointsMap = this.map.mapDef.gameMode.points;
+        if (!pointsMap) return;
+        const players = this.modeManager.getPlayersSortedByRank();
+
+        const playerPoints = new Map<string, number>();
+        let rank = 1;
+        for (let i = 0; i < players.length; i++) {
+            let player = players[i].player;
+            if (pointsMap.ignoreRoles?.includes(player.role)) {
+                playerPoints.set(player.name, 0);
+                continue;
+            }
+            let points = 0;
+            points += player.kills * pointsMap.kill;
+            for (let p of pointsMap.placement) {
+                if (rank <= p.top) {
+                    points += p.points;
+                }
+            }
+            playerPoints.set(player.name, points);
+            rank++;
+        }
+
+        // console.log("Player points: ", playerPoints);
     }
 
     addJoinTokens(tokens: FindGamePrivateBody["playerData"], autoFill: boolean) {

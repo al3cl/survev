@@ -133,6 +133,17 @@ export interface MapDef {
         doNadeOC?: boolean;
         removeHeadshots?: boolean;
         hideNSeek?: boolean;
+        points?: {
+            kill: number;
+            placement: Array<{
+                top: number;
+                points: number;
+            }>;
+            // e.g. {top: 7, points: 1} means you get 1 point for being in the top 7
+            // these are cumulative
+            ignoreRoles?: Array<string>;
+            // roles in this array don't get points and are ignored for calculating placement
+        };
     };
     gameConfig: {
         planes: {
