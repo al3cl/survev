@@ -23,7 +23,6 @@ export interface GunDef {
     shotSpread: number;
     bulletCount: number;
     bulletType: string;
-    bulletTypeBonus?: string;
     headshotMult: number;
     speed: {
         equip: number;
@@ -129,7 +128,6 @@ export const BaseDefs: Record<string, GunDef> = {
         shotSpread: 3,
         bulletCount: 1,
         bulletType: "bullet_mp5",
-        bulletTypeBonus: "bullet_mp5_bonus",
         headshotMult: 2,
         speed: { equip: 0, attack: 0 },
         lootImg: {
@@ -177,7 +175,6 @@ export const BaseDefs: Record<string, GunDef> = {
         shotSpread: 10,
         bulletCount: 1,
         bulletType: "bullet_mac10",
-        bulletTypeBonus: "bullet_mac10_bonus",
         headshotMult: 2,
         speed: { equip: 0, attack: 0 },
         lootImg: {
@@ -227,7 +224,6 @@ export const BaseDefs: Record<string, GunDef> = {
         bulletCount: 1,
         burstCount: 3,
         bulletType: "bullet_ump9",
-        bulletTypeBonus: "bullet_ump9_bonus",
         headshotMult: 2,
         speed: { equip: 0, attack: 0 },
         lootImg: {
@@ -275,7 +271,6 @@ export const BaseDefs: Record<string, GunDef> = {
         shotSpread: 2.5,
         bulletCount: 1,
         bulletType: "bullet_vector",
-        bulletTypeBonus: "bullet_vector_bonus",
         headshotMult: 2,
         speed: { equip: 0, attack: 0 },
         lootImg: {
@@ -370,7 +365,6 @@ export const BaseDefs: Record<string, GunDef> = {
         shotSpread: 4,
         bulletCount: 1,
         bulletType: "bullet_scorpion",
-        bulletTypeBonus: "bullet_scorpion_bonus",
         headshotMult: 2,
         speed: { equip: 0, attack: 0 },
         lootImg: {
@@ -418,7 +412,6 @@ export const BaseDefs: Record<string, GunDef> = {
         shotSpread: 2,
         bulletCount: 1,
         bulletType: "bullet_vss",
-        bulletTypeBonus: "bullet_vss_bonus",
         headshotMult: 1.75,
         speed: { equip: 0, attack: 0 },
         lootImg: {
@@ -1227,6 +1220,53 @@ export const BaseDefs: Record<string, GunDef> = {
             deploy: "bar_switch_01",
         },
     },
+    imbel: {
+        name: "IMD-2",
+        type: "gun",
+        quality: 0,
+        fireMode: "auto",
+        caseTiming: "shoot",
+        ammo: "556mm",
+        ammoSpawnCount: 120,
+        maxClip: 40,
+        maxReload: 40,
+        extendedClip: 50,
+        extendedReload: 50,
+        reloadTime: 2.1,
+        fireDelay: 0.092,
+        switchDelay: 0.75,
+        barrelLength: 3.9,
+        barrelOffset: 0,
+        recoilTime: 1e10,
+        moveSpread: 5,
+        shotSpread: 3,
+        bulletCount: 1,
+        bulletType: "bullet_imbel",
+        headshotMult: 2,
+        speed: { equip: 0, attack: -1 },
+        lootImg: {
+            sprite: "loot-weapon-imbel.img",
+            tint: 0xff00,
+            border: "loot-circle-outer-01.img",
+            borderTint: 0,
+            scale: 0.3,
+        },
+        worldImg: {
+            sprite: "gun-imbel-01.img",
+            scale: { x: 0.5, y: 0.5 },
+            tint: 0xffffff,
+            leftHandOffset: { x: 10, y: 0 },
+            recoil: 1.4,
+        },
+        particle: { shellScale: 1, shellOffset: 0.6 },
+        sound: {
+            shoot: "imbel_01",
+            reload: "imbel_reload_01",
+            pickup: "gun_pickup_01",
+            empty: "empty_fire_02",
+            deploy: "imbel_switch_01",
+        },
+    },
     pkp: {
         name: "PKP Pecheneg",
         type: "gun",
@@ -1977,6 +2017,56 @@ export const BaseDefs: Record<string, GunDef> = {
             deploy: "spas12_cycle_01",
         },
     },
+    spas16: {
+        name: "SPAS-16",
+        type: "gun",
+        quality: 1,
+        fireMode: "auto",
+        caseTiming: "shoot",
+        ammo: "12gauge",
+        deployGroup: 1,
+        ammoSpawnCount: 18,
+        maxClip: 6,
+        maxReload: 6,
+        extendedClip: 8,
+        extendedReload: 8,
+        reloadTime: 2.9,
+        fireDelay: 0.29,
+        switchDelay: 0.75,
+        pullDelay: 0.75,
+        barrelLength: 3.65,
+        barrelOffset: 0,
+        recoilTime: 1e10,
+        moveSpread: 1.5,
+        shotSpread: 4,
+        bulletCount: 9,
+        jitter: 0.3,
+        bulletType: "bullet_flechette",
+        headshotMult: 1.5,
+        speed: { equip: 0, attack: 0 },
+        lootImg: {
+            sprite: "loot-weapon-spas16.img",
+            tint: 0xff00,
+            border: "loot-circle-outer-01.img",
+            borderTint: 0,
+            scale: 0.3,
+        },
+        worldImg: {
+            sprite: "gun-spas16-01.img",
+            scale: { x: 0.5, y: 0.5 },
+            tint: 0xffffff,
+            leftHandOffset: { x: 6.5, y: 0.5 },
+            recoil: 1.33,
+        },
+        particle: { shellScale: 1, shellOffset: 0.45 },
+        sound: {
+            shoot: "spas16_01",
+            reload: "spas16_reload_01",
+            pickup: "gun_pickup_01",
+            empty: "empty_fire_01",
+            deploy: "spas16_switch_01",
+        },
+    },
     m1014: {
         name: "M1014",
         type: "gun",
@@ -2099,7 +2189,6 @@ export const BaseDefs: Record<string, GunDef> = {
         shotSpread: 3,
         bulletCount: 1,
         bulletType: "bullet_m9",
-        bulletTypeBonus: "bullet_m9_bonus",
         headshotMult: 2,
         speed: { equip: 0, attack: 0 },
         lootImg: {
@@ -2150,7 +2239,6 @@ export const BaseDefs: Record<string, GunDef> = {
         shotSpread: 4,
         bulletCount: 1,
         bulletType: "bullet_m9",
-        bulletTypeBonus: "bullet_m9_bonus",
         headshotMult: 2,
         speed: { equip: 0, attack: 0 },
         lootImg: {
@@ -2253,7 +2341,6 @@ export const BaseDefs: Record<string, GunDef> = {
         bulletCount: 1,
         burstCount: 3,
         bulletType: "bullet_m93r",
-        bulletTypeBonus: "bullet_m93r_bonus",
         headshotMult: 2,
         speed: { equip: 0, attack: 0 },
         lootImg: {
@@ -2306,7 +2393,6 @@ export const BaseDefs: Record<string, GunDef> = {
         bulletCount: 1,
         burstCount: 3,
         bulletType: "bullet_m93r",
-        bulletTypeBonus: "bullet_m93r_bonus",
         headshotMult: 2,
         speed: { equip: 0, attack: 0 },
         lootImg: {
@@ -2356,7 +2442,6 @@ export const BaseDefs: Record<string, GunDef> = {
         shotSpread: 12,
         bulletCount: 1,
         bulletType: "bullet_glock",
-        bulletTypeBonus: "bullet_glock_bonus",
         headshotMult: 2,
         speed: { equip: 0, attack: 0 },
         lootImg: {
@@ -2407,7 +2492,6 @@ export const BaseDefs: Record<string, GunDef> = {
         shotSpread: 18,
         bulletCount: 1,
         bulletType: "bullet_glock",
-        bulletTypeBonus: "bullet_glock_bonus",
         headshotMult: 2,
         speed: { equip: 0, attack: 0 },
         lootImg: {
@@ -2457,7 +2541,6 @@ export const BaseDefs: Record<string, GunDef> = {
         shotSpread: 2,
         bulletCount: 1,
         bulletType: "bullet_p30l",
-        bulletTypeBonus: "bullet_p30l_bonus",
         headshotMult: 2,
         speed: { equip: 1, attack: 1 },
         lootImg: {
@@ -2508,7 +2591,6 @@ export const BaseDefs: Record<string, GunDef> = {
         shotSpread: 3,
         bulletCount: 1,
         bulletType: "bullet_p30l",
-        bulletTypeBonus: "bullet_p30l_bonus",
         headshotMult: 2,
         speed: { equip: 0, attack: 0 },
         lootImg: {
