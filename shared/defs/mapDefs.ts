@@ -22,6 +22,7 @@ import {PerkAbsorption} from "./maps/perkAbsorptionDefs.ts";
 import type { MapId } from "./types/misc";
 import {GGBRUHClassic} from "./maps/ggbruhClassicDefs.ts";
 import {HideNSeekHalloween} from "./maps/hideNSeekHalloweenDefs.ts";
+import { PresidentClassic } from "./maps/presidentClassicDefs.ts";
 
 export type Atlas =
     | "gradient"
@@ -65,6 +66,7 @@ export const MapDefs = {
     perk_absorption: PerkAbsorption,
     ggbruh_classic: GGBRUHClassic,
     hide_n_seek_halloween: HideNSeekHalloween,
+    president_classic: PresidentClassic,
 
     /* STRIP_FROM_PROD_CLIENT:START */
     test_normal: testNormal,
@@ -133,6 +135,8 @@ export interface MapDef {
         doNadeOC?: boolean;
         removeHeadshots?: boolean;
         hideNSeek?: boolean;
+        presidentMode?: boolean;
+
         points?: {
             kill: number;
             placement: Array<{

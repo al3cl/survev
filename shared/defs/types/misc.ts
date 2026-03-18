@@ -14,6 +14,7 @@ export enum MapId {
     PerkAbsorption = 100,
     GGBRUHClassic = 101,
     HideNSeekHalloween = 102,
+    PresidentClassic = 103,
 }
 
 export const TeamModeToString = {
