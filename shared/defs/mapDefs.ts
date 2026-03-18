@@ -211,6 +211,7 @@ export interface MapDef {
                     odds: number;
                     innerRad: number;
                     outerRad: number;
+                    centerObj?: string;
                     spawnBound: {
                         pos: Vec2;
                         rad: number;
