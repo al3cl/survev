@@ -16,7 +16,7 @@ const mapDef: PartialMapDef = {
     // },
     gameMode: {
         doNadeOC: true,
-        presidentMode: true,
+        president: true,
     },
     // lootTable: {
     //     // ...

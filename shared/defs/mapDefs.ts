@@ -135,7 +135,7 @@ export interface MapDef {
         doNadeOC?: boolean;
         removeHeadshots?: boolean;
         hideNSeek?: boolean;
-        presidentMode?: boolean;
+        president?: boolean;
 
         points?: {
             kill: number;

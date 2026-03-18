@@ -228,6 +228,12 @@ export class PlayerBarn {
             } else {
                 player.promoteToRole("hider");
             }
+        } else if (!!this.game.map.mapDef.gameMode.president) {
+            if (group?.players[group.presidentIdx] === player) {
+                player.promoteToRole("president");
+            } else {
+                player.promoteToRole("citizen");
+            }
         }
 
         return player;

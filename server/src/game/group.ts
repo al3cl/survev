@@ -148,11 +148,15 @@ export class Group extends BasePlayerGroup {
     spawnPositionTicker = 0;
     spawnPosition?: Vec2;
 
+    presidentIdx: number;
+
     constructor(hash: string, groupId: number, autoFill: boolean, maxPlayers: number) {
         super(groupId, "group");
         this.hash = hash;
         this.autoFill = autoFill;
         this.maxPlayers = maxPlayers;
+
+        this.presidentIdx = util.randomInt(0, 3);
     }
 
     canJoin(players: number) {
