@@ -148,7 +148,10 @@ export class Group extends BasePlayerGroup {
     spawnPositionTicker = 0;
     spawnPosition?: Vec2;
 
-    presidentIdx: number;
+    private readonly presidentIdx: number;
+    getPresident(): Player | undefined {
+        return this.players.at(this.presidentIdx);
+    }
 
     constructor(hash: string, groupId: number, autoFill: boolean, maxPlayers: number) {
         super(groupId, "group");

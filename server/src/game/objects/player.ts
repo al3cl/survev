@@ -229,7 +229,7 @@ export class PlayerBarn {
                 player.promoteToRole("hider");
             }
         } else if (!!this.game.map.mapDef.gameMode.president) {
-            if (group?.players[group.presidentIdx] === player) {
+            if (group?.getPresident() === player) {
                 player.promoteToRole("president");
             } else {
                 player.promoteToRole("citizen");
@@ -2882,6 +2882,139 @@ export class Player extends BaseGameObject {
             this.team!.checkAndApplyLastMan();
             this.team!.checkAndApplyCaptain();
         }
+    }
+
+    // PtP: handle citizen "death" (uses a lot of code from down())
+    citizenKill(params: DamageParams): void {
+        this.boost = 0;
+        this.health = 100;
+
+        // idk what this do lol
+        this.setDirty();
+
+        this.shootStart = false;
+        this.shootHold = false;
+        this.cancelAction();
+
+        this.weaponManager.throwThrowable();
+        this.dropAndRemoveAllLoot();
+
+        this.teleportNearPresident();
+
+        //
+        // Send downed msg
+        //
+        const downedMsg = new net.KillMsg();
+        downedMsg.damageType = params.damageType;
+        downedMsg.itemSourceType = params.gameSourceType ?? "";
+        downedMsg.mapSourceType = params.mapSourceType ?? "";
+        downedMsg.targetId = this.__id;
+        downedMsg.downed = true;
+
+        if (params.source?.__type === ObjectType.Player) {
+            this.downedBy = params.source;
+            downedMsg.killerId = params.source.__id;
+            downedMsg.killCreditId = params.source.__id;
+        }
+
+        this.game.broadcastMsg(net.MsgType.Kill, downedMsg);
+    }
+
+    // for PtP mode
+    private teleportNearPresident(): void {
+        const rad = GameConfig.player.teammateSpawnRadius;
+        const presidentPos = this.group!.getPresident()!.pos;
+        const getPosNearPresident = (): Vec2 => {
+            return v2.add(presidentPos, util.randomPointInCircle(rad));
+        };
+        const tpPos = this.game.map.getRandomSpawnPos(getPosNearPresident, this.group, this.team, false);
+
+        v2.set(this.pos, tpPos);
+        this.setPartDirty();
+        this.game.grid.updateObject(this);
+    }
+
+    private dropAndRemoveAllLoot() {
+        for (let i = 0; i < GameConfig.WeaponSlot.Count; i++) {
+            const weap = this.weapons[i];
+            if (!weap.type) continue;
+            const def = GameObjectDefs[weap.type];
+            switch (def.type) {
+                case "gun":
+                    this.weaponManager.dropGun(i);
+                    weap.type = "";
+                    break;
+                case "melee":
+                    if (def.noDropOnDeath || weap.type === "fists") break;
+                    this.game.lootBarn.addLoot(weap.type, this.pos, this.layer, 1);
+                    weap.type = "fists";
+                    break;
+                case "throwable":
+                    weap.type = "";
+                    break;
+            }
+        }
+        this.weaponManager.setCurWeapIndex(GameConfig.WeaponSlot.Melee);
+
+        for (const item of Object.keys(this.invManager.items) as InventoryItem[]) {
+            // const def = GameObjectDefs[item] as AmmoDef | HealDef;
+            if (item == "1xscope") {
+                continue;
+            }
+
+            const amount = this.invManager.get(item);
+            if (amount > 0) {
+                this.game.lootBarn.addLoot(item, this.pos, this.layer, amount);
+                this.invManager.take(item, amount);
+            }
+        }
+
+        for (const item of GEAR_TYPES) {
+            const type = this[item];
+            if (!type) continue;
+            const def = GameObjectDefs[type] as HelmetDef | ChestDef | BackpackDef;
+            if (!!(def as ChestDef).noDrop || def.level < 1) continue;
+
+            // see player.dropArmor()
+            // if (armorDef.type == "helmet" && armorDef.role && this.role == armorDef.role) {
+            //     this.removeRole();
+            //     this.hasRoleHelmet = false;
+            // }
+            // if (armorDef.type == "helmet" && armorDef.perk && this.hasPerk(armorDef.perk)) {
+            //     this.removePerk(armorDef.perk);
+            // }
+
+            if (def.type === "backpack") {
+                this[item] = "backpack00";
+            } else {
+                this[item] = "";
+            }
+            this.game.lootBarn.addLoot(type, this.pos, this.layer, 1);
+        }
+
+        if (this.outfit) {
+            const def = GameObjectDefs[this.outfit] as OutfitDef;
+            if (!def.noDropOnDeath && !def.noDrop) {
+                this.game.lootBarn.addLoot(this.outfit, this.pos, this.layer, 1);
+                this.outfit = "outfitBase";
+            }
+        }
+
+        for (let i = this.perks.length - 1; i >= 0; i--) {
+            const perk = this.perks[i];
+            if (perk.droppable || perk.replaceOnDeath) {
+                this.game.lootBarn.addLoot(
+                    perk.replaceOnDeath || perk.type,
+                    this.pos,
+                    this.layer,
+                    1,
+                );
+            }
+            this.removePerk(perk.type);
+        }
+
+        // abundance of caution
+        this.setDirty();
     }
 
     killedBy: Player | undefined;

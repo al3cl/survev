@@ -597,25 +597,30 @@ export const RoleDefs: Record<string, RoleDef> = {
         type: "role",
         announce: false,
         sound: {},
-        // defaultItems: createDefaultItems({
-        //     outfit: "outfitBruh",
-        //     weapons: [
-        //         { type: "m1014", ammo: 8 },
-        //         { type: "pkp", ammo: 200 },
-        //         { type: "bonesaw_healer", ammo: 0 },
-        //         { type: "mirv", ammo: 0 },
-        //     ],
-        //     helmet: "helmet03",
-        //     chest: "chest03",
-        //     backpack: "backpack03",
-        //     inventory: {
-        //         mirv: 5,
-        //         frag: 10,
-        //         strobe: 1,
-        //         "2xscope": 1,
-        //         "4xscope": 1,
-        //         "8xscope": 1,
-        //     },
-        // }),
+        visorImg: {
+            baseSprite: "player-visor-tank.img",
+            spriteScale: 0.3,
+        },
+        color: 0xd38600,
+        defaultItems: createDefaultItems({
+            outfit: "outfitBruh",
+            // weapons: [
+            //     { type: "m1014", ammo: 8 },
+            //     { type: "pkp", ammo: 200 },
+            //     { type: "bonesaw_healer", ammo: 0 },
+            //     { type: "mirv", ammo: 0 },
+            // ],
+            // helmet: "helmet03",
+            // chest: "chest03",
+            // backpack: "backpack03",
+            // inventory: {
+            //     mirv: 5,
+            //     frag: 10,
+            //     strobe: 1,
+            //     "2xscope": 1,
+            //     "4xscope": 1,
+            //     "8xscope": 1,
+            // },
+        }),
     }
 };

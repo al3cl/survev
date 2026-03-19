@@ -326,12 +326,46 @@ export class GameModeManager {
                     params.killCreditSource = player.downedBy;
                 }
 
+                // PtP (player is already downed - only happens if player has self_revive)
+                // probably doesn't work in 50v50
+                if (!!this.game.map.mapDef.gameMode.president) {
+                    const president = player.group!.getPresident();
+                    if (player.role === "president" || !president || president.dead || president.disconnected) {
+                        player.kill(params);
+                        group.killAllTeammates();
+                    } else {
+                        if (player.disconnected) {
+                            player.kill(params);
+                        } else {
+                            player.citizenKill(params);
+                        }
+                    }
+                    return;
+                }
+
                 player.kill(params);
                 // special case that only happens when the player has self_revive since the teammates wouldnt have previously been finished off
                 if (group.checkAllDowned(player) && !group.checkSelfRevive()) {
                     // don't kill teammates if any one has self revive
                     group.killAllTeammates();
                 }
+                return;
+            }
+
+            // PtP (player is not downed and does not have self_revive)
+            if (!!this.game.map.mapDef.gameMode.president) {
+                const president = player.group!.getPresident();
+                if (player.role === "president" || !president || president.dead || president.disconnected) {
+                    player.kill(params);
+                    group.killAllTeammates();
+                } else {
+                    if (player.disconnected) {
+                        player.kill(params);
+                    } else {
+                        player.citizenKill(params);
+                    }
+                }
+                // automatically handles the necessary disconnection cases so we can return early
                 return;
             }
 

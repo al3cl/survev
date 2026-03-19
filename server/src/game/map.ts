@@ -2139,7 +2139,7 @@ export class GameMap {
         return this.getRandomSpawnPos(getPos, group, team);
     }
 
-    getRandomSpawnPos(getPos: () => Vec2, group?: Group, team?: Team): Vec2 {
+    getRandomSpawnPos(getPos: () => Vec2, group?: Group, team?: Team, checkNearbyOpps: boolean = true): Vec2 {
         let pos = getPos();
 
         this.trySpawn(
@@ -2151,13 +2151,15 @@ export class GameMap {
                     return false;
                 }
 
-                for (let i = 0; i < this.game.playerBarn.livingPlayers.length; i++) {
-                    const player = this.game.playerBarn.livingPlayers[i];
-                    if (group && player.groupId === group.id) continue;
-                    if (team && player.teamId === team.id) continue;
+                if (checkNearbyOpps) {
+                    for (let i = 0; i < this.game.playerBarn.livingPlayers.length; i++) {
+                        const player = this.game.playerBarn.livingPlayers[i];
+                        if (group && player.groupId === group.id) continue;
+                        if (team && player.teamId === team.id) continue;
 
-                    if (v2.distance(player.pos, pos) < GameConfig.player.minSpawnRad) {
-                        return false;
+                        if (v2.distance(player.pos, pos) < GameConfig.player.minSpawnRad) {
+                            return false;
+                        }
                     }
                 }
 
