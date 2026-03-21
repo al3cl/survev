@@ -3223,13 +3223,13 @@ export class Player extends BaseGameObject {
             }
         }
 
-        // hide n seek: if 0 or 1 hiders left now, kill all seekers
+        // hide n seek: if 1 hider left now, kill all seekers
         if (this.game.map.mapDef.gameMode.hideNSeek) {
             let aliveHiderCount = this.game.playerBarn.livingPlayers.filter((player) =>
                 player.role === "hider"
             ).length;
-            // only check if hider just died
-            if (this.role === "hider" && aliveHiderCount < 2) {
+            // only check if a hider just died
+            if (this.role === "hider" && aliveHiderCount === 1) {
                 let aliveSeekers = this.game.playerBarn.livingPlayers.filter((player) =>
                     player.role === "seeker"
                 );
