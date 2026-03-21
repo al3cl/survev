@@ -584,7 +584,6 @@ export const RoleDefs: Record<string, RoleDef> = {
                 strobe: 1,
                 "2xscope": 1,
                 "4xscope": 1,
-                "8xscope": 1,
             },
         }),
     },
