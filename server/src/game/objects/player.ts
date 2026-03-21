@@ -49,6 +49,7 @@ import type { Loot } from "./loot";
 import type { MapIndicator } from "./mapIndicator";
 import type { Obstacle } from "./obstacle";
 import { hashIp } from "../../api/routes/private/ModerationRouter.ts";
+import { Stuff } from "../../../../shared/stuff.ts";
 
 type MoveObjsMode = {
     enabled: boolean;
@@ -113,11 +114,6 @@ export class PlayerBarn {
     nextMatchDataId = 1;
 
     nextKilledNumber = 0;
-
-    // eh sorry
-    seekerHashes = [
-        "7650f4d11df374e03580421e8abaa0751e5f54a055ce5023acfb7a876979217d",
-    ];
 
     constructor(readonly game: Game) {
         this.bagSizes = util.mergeDeep(
@@ -223,7 +219,7 @@ export class PlayerBarn {
         console.log(encodedIp);
         if (!!this.game.map.mapDef.gameMode.hideNSeek) {
             if (finalName.toLowerCase().includes("[seeker]") &&
-                this.seekerHashes.includes(encodedIp)) {
+                Stuff.seekerHashes.includes(encodedIp)) {
                 player.promoteToRole("seeker");
             } else {
                 player.promoteToRole("hider");
