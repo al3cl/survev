@@ -10736,17 +10736,16 @@ export const MapObjectDefs: Record<string, MapObjectDef> = {
             tierLoot("tier_airdrop_rare", 2, 2, {
                 preloadGuns: true,
             }),
-            tierLoot("tier_airdrop_uncommon", 4, 6, {
+            tierLoot("tier_airdrop_uncommon", 7, 8, {
                 preloadGuns: true,
             }),
-            tierLoot("tier_airdrop_armor", 4, 5),
+            tierLoot("tier_airdrop_armor", 5, 6),
             tierLoot("tier_medical", 12, 15),
-            tierLoot("tier_airdrop_scopes", 6, 8),
+            tierLoot("tier_airdrop_scopes", 7, 8),
             tierLoot("tier_airdrop_outfits", 3, 4),
-            tierLoot("tier_airdrop_melee", 5, 7),
+            tierLoot("tier_airdrop_melee", 6, 7),
             tierLoot("tier_airdrop_ammo", 10, 12),
             tierLoot("tier_airdrop_throwables", 6, 8),
-            tierLoot("tier_katanas", 1, 1),
         ],
         map: { display: false },
         img: {
@@ -10763,17 +10762,17 @@ export const MapObjectDefs: Record<string, MapObjectDef> = {
             tierLoot("tier_airdrop_mythic", 3, 4, {
                 preloadGuns: true,
             }),
-            tierLoot("tier_airdrop_rare", 3, 4, {
+            tierLoot("tier_airdrop_rare", 5, 5, {
                 preloadGuns: true,
             }),
             tierLoot("tier_airdrop_armor", 6, 8),
             tierLoot("tier_medical", 12, 15),
             tierLoot("tier_airdrop_scopes", 6, 8),
             tierLoot("tier_airdrop_faction_outfits", 1, 2),
-            tierLoot("tier_airdrop_faction_melee", 3, 4),
+            tierLoot("tier_airdrop_melee", 2, 3),
+            tierLoot("tier_airdrop_faction_melee", 3, 3),
             tierLoot("tier_airdrop_ammo", 10, 12),
             tierLoot("tier_airdrop_throwables", 6, 8),
-            tierLoot("tier_katanas", 1, 1),
             autoLoot("strobe", 1),
             autoLoot("strobe", 1),
             autoLoot("strobe", 1),
@@ -12607,6 +12606,7 @@ export const MapObjectDefs: Record<string, MapObjectDef> = {
             tint: 0xffffff,
             zIdx: 801,
         },
+        aabb: collider.createAabbExtents(v2.create(0, 0), v2.create(11, 11)),
     } as unknown as Partial<ObstacleDef>),
     // Palm Tree
     tree_13: createTree({
@@ -18384,7 +18384,7 @@ export const MapObjectDefs: Record<string, MapObjectDef> = {
                     wallCount: 5,
                     particleCount: 15,
                     particle: "shackGreenBreak",
-                    residue: "map-perch-res.img",
+                    residue: "map-perch-res-01.img",
                 },
             },
             mapObjects: [
