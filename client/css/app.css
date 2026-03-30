@@ -4262,8 +4262,7 @@ a:active {
 }
 
 #featured-youtuber {
-  display: none !important;
-  margin-top: 12px;
+  display: none;
 }
 
 .youtube-header {
@@ -4304,6 +4303,7 @@ a:active {
 
 #featured-streamers {
   visibility: hidden;
+  margin-bottom: 12px;
 }
 
 .streaming-header {

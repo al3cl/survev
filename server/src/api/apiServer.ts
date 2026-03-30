@@ -78,7 +78,7 @@ export class ApiServer {
         const data: SiteInfoRes = {
             modes: this.modes,
             pops: {},
-            youtube: { name: "", link: "" },
+            youtube: { name: "alec surviv", link: "https://www.youtube.com/@alecsurviv" },
             twitch: [],
             country: "US",
             gitRevision: GIT_VERSION,

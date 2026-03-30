@@ -140,6 +140,7 @@ export class SiteInfo {
                 "visibility",
                 hasTwitchStreamers ? "visible" : "hidden",
             );
+            if (!hasTwitchStreamers) featuredStreamersElem.css("display", "none");
 
             const featuredYoutuberElem = $("#featured-youtuber");
             const displayYoutuber = this.info.youtube;
