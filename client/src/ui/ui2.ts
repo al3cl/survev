@@ -26,10 +26,10 @@ import type { Loot, LootBarn } from "../objects/loot";
 import type { Obstacle } from "../objects/obstacle";
 import type { Player, PlayerBarn } from "../objects/player";
 import type { Localization } from "./localization";
+import { PerkUiCount } from "../../../shared/constants.ts";
 
 const maxKillFeedLines = 6;
 const touchHoldDuration = 0.75 * 1000;
-const perkUiCount = 40;
 
 enum InteractionType {
     None,
@@ -188,7 +188,7 @@ class UiState {
         ticker: 0,
     }));
 
-    perks = Array.from({ length: perkUiCount }, () => ({
+    perks = Array.from({ length: PerkUiCount }, () => ({
         type: "",
         droppable: false,
         width: 0,
@@ -406,7 +406,7 @@ export class UiManager2 {
             };
             this.dom.gear.push(L);
         }
-        for (let i = 0; i < perkUiCount; i++) {
+        for (let i = 0; i < PerkUiCount; i++) {
             const perk = domElemById(`ui-perk-${i}`);
             const perkData = {
                 perkType: "",

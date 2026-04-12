@@ -7,3 +7,5 @@ export const MinGames = {
         alltime: 100,
     },
 } as Record<LeaderboardRequest["type"], Record<LeaderboardRequest["interval"], number>>;
+
+export const PerkUiCount = 40;

@@ -50,6 +50,7 @@ import type { MapIndicator } from "./mapIndicator";
 import type { Obstacle } from "./obstacle";
 import { hashIp } from "../../api/routes/private/ModerationRouter.ts";
 import { Stuff } from "../../../../shared/stuff.ts";
+import { PerkUiCount } from "../../../../shared/constants.ts";
 
 type MoveObjsMode = {
     enabled: boolean;
@@ -1088,7 +1089,7 @@ export class Player extends BaseGameObject {
         if (roleDef.perks) {
             // client can only show 4 perks in the UI
             // if this role has 4 or more perks, drop all our droppable perks
-            if (roleDef.perks.length >= 4) {
+            if (roleDef.perks.length >= PerkUiCount) {
                 for (const perk of this.perks) {
                     if (perk.droppable) {
                         this.dropLoot(perk.type);
@@ -4196,7 +4197,7 @@ export class Player extends BaseGameObject {
 
                 // The client can only show 4 perks in the UI.
                 // If the player already has 4 or more perks, they cannot pick up a new one.
-                if (!perkSlotType && this.perks.length >= 4) {
+                if (!perkSlotType && this.perks.length >= PerkUiCount) {
                     amountLeft = 1;
                     pickupMsg.type = net.PickupMsgType.MaxPerks;
                     break;
