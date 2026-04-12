@@ -6,7 +6,6 @@ import { Hono } from "hono";
 import { getCookie } from "hono/cookie";
 import { cors } from "hono/cors";
 import { HTTPException } from "hono/http-exception";
-import { z } from "zod";
 import { version } from "../../../package.json";
 import {
     type FindGameResponse,
@@ -185,34 +184,27 @@ app.post("/api/find_game", validateParams(zFindGameBody), async (c) => {
     });
 });
 
-app.post(
-    "/api/report_error",
-    rateLimitMiddleware(5, 60 * 1000),
-    validateParams(z.object({ loc: z.string(), error: z.any(), data: z.any() })),
-    (c) => {
-        const content = c.req.valid("json");
-        if (content.error) {
-            try {
-                content.error = JSON.parse(content.error);
-            } catch {}
-        }
+app.post("/api/report_error", rateLimitMiddleware(5, 60 * 1000), async (c) => {
+    const content = await c.req.json();
 
-        let stackTrace: string | undefined;
-        if (
-            typeof content.error == "object" &&
-            "stacktrace" in content.error &&
-            typeof content.error.stacktrace == "string" &&
-            content.error.stacktrace
-        ) {
-            stackTrace = `### Stacktrace:\n \`\`\`${content.error.stacktrace.replaceAll("`", "\\`")}\`\`\``;
-            delete content.error.stacktrace;
-        }
+    let stackTrace: string | undefined;
+    if (
+        typeof content.data == "object" &&
+        "stacktrace" in content.data &&
+        typeof content.data.stacktrace == "string" &&
+        content.data.stacktrace
+    ) {
+        stackTrace = `### Stacktrace:\n \`\`\`${content.data.stacktrace.replaceAll("`", "\\`")}\`\`\``;
+        delete content.data.stacktrace;
+    }
 
+    if (stackTrace) {
         logErrorToWebhook("client", content, stackTrace);
-
-        return c.json({ success: true }, 200);
-    },
-);
+    } else {
+        logErrorToWebhook("client", content);
+    }
+    return c.json({ success: true }, 200);
+});
 
 // reset player count to 0 if region seems to be down
 setInterval(() => {

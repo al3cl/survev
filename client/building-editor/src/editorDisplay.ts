@@ -194,7 +194,7 @@ export class EditorDisplay {
 
     updatePlayer() {
         const pos = this.toWorldPos(this.config.get("buildingEditor")!.pos);
-        const obj = {
+        const obj: ObjectData<ObjectType.Player> = {
             outfit: "outfitDev",
             backpack: "backpack02",
             helmet: "helmet01",
@@ -212,6 +212,7 @@ export class EditorDisplay {
             healEffect: false,
             frozen: false,
             frozenOri: 0,
+            frozenType: "",
             hasteType: 0,
             hasteSeq: 0,
             scale: 1,

@@ -789,7 +789,7 @@ export class UiManager {
                 playing: this.game.m_playingTicker,
                 groupInfo: playerBarn.groupInfo,
             };
-            errorLogManager.logError(`badTeamInfo_1: ${JSON.stringify(err)}`);
+            errorLogManager.logError("badTeamInfo_1", err);
         }
 
         const layoutSm = device.uiLayout == device.UiLayout.Sm;

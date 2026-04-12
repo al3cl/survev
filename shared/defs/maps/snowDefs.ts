@@ -37,7 +37,6 @@ const mapDef: PartialMapDef = {
             planeSound: "plane_02",
             airdropImg: "map-chute-01x.img",
         },
-        frozenSprites: ["player-snow-01.img", "player-snow-02.img", "player-snow-03.img"],
     },
     /* STRIP_FROM_PROD_CLIENT:START */
     gameConfig: {

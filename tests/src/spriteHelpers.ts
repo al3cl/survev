@@ -133,12 +133,6 @@ export function getAllMapSprites(map: keyof typeof MapDefs) {
         sprites.add(biome.airdrop.airdropImg);
     }
 
-    if (biome.frozenSprites) {
-        for (const sprite of biome.frozenSprites) {
-            sprites.add(sprite);
-        }
-    }
-
     sprites.delete("");
     sprites.delete("none");
 

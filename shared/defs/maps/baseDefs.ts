@@ -719,6 +719,28 @@ export const Main: MapDef = {
             { name: "", count: 1, weight: 25 },
             { name: "tier_perks", count: 1, weight: 1 },
         ],
+        tier_airdrop_potato: [
+            { name: "potato_cannon", count: 1, weight: 1 },
+            { name: "potato_smg", count: 1, weight: 1 },
+            { name: "potato_lmg", count: 1, weight: 1 },
+        ],
+        tier_dev_guns: [
+            { name: "m1100", count: 1, weight: 11 },
+            { name: "m9", count: 1, weight: 9 },
+            { name: "m1911", count: 1, weight: 3 },
+            { name: "garand", count: 1, weight: 1 },
+            { name: "m9_cursed", count: 1, weight: 0.1 },
+        ],
+        tier_dev_melee: [
+            { name: "bowie_frontier", count: 1, weight: 1 },
+            { name: "bowie_vintage", count: 1, weight: 1 },
+            { name: "huntsman_burnished", count: 1, weight: 1 },
+            { name: "huntsman_rugged", count: 1, weight: 1 },
+            { name: "bayonet_woodland", count: 1, weight: 1 },
+            { name: "bayonet_rugged", count: 1, weight: 1 },
+            { name: "karambit_drowned", count: 1, weight: 1 },
+            { name: "karambit_prismatic", count: 1, weight: 1 },
+        ],
         tier_knives: [],
 
         tier_perk_absorption_perks: [

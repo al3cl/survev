@@ -282,6 +282,7 @@ export class LoadoutDisplay {
             healEffect: false,
             frozen: false,
             frozenOri: 0,
+            frozenType: "",
             hasteType: 0,
             hasteSeq: 0,
             scale: 1,

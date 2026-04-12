@@ -1527,6 +1527,16 @@ export class GameMap {
                     "barn_01",
                 ];
 
+                // obstacles, buildings, and structures that are specific to a team but can spawn anywhere on their side.
+                const teamObjects = [
+                    "potato_01f",
+                    "potato_02f",
+                    "potato_03f",
+                    "tomato_01",
+                    "tomato_02",
+                    "tomato_03",
+                ];
+
                 // obstacles, buildings, and structures that need to spawn away from the sides and closer to the center river
                 const centerObjects = [
                     "greenhouse_01",
@@ -1537,8 +1547,16 @@ export class GameMap {
                 let divisionIdx: number;
                 if ("teamId" in def && def.teamId) {
                     const teamId = def.teamId;
-                    // picks either of the furthest divisions from the center
-                    divisionIdx = (teamId - 1) * (divisions - 1);
+                    if (teamObjects.includes(type)) {
+                        // picks any of the divisions on the team's side (0-4 for red, 5-9 for blue)
+                        divisionIdx = util.randomInt(
+                            (teamId - 1) * (divisions / 2),
+                            teamId * (divisions / 2) - 1,
+                        );
+                    } else {
+                        // picks either of the furthest divisions from the center
+                        divisionIdx = (teamId - 1) * (divisions - 1);
+                    }
                 } else if (edgeObjects.includes(type)) {
                     const teamId = util.randomInt(1, 2);
                     // picks either of the furthest divisions from the center

@@ -49,6 +49,8 @@ export interface JoinTokenData {
 export class Game {
     started = false;
     stopped = false;
+    // for debug
+    preventStart = false;
     allowJoin = false;
     over = false;
     startedTime = 0;
@@ -112,6 +114,8 @@ export class Game {
     start = Date.now();
 
     profiler = new Profiler();
+
+    debugSpeedMulti = 1;
 
     constructor(
         id: string,
@@ -178,6 +182,8 @@ export class Game {
         if (!this.now) this.now = now;
         dt ??= math.clamp((now - this.now) / 1000, 0.001, 1 / 8);
 
+        dt *= this.debugSpeedMulti;
+
         this.now = now;
 
         if (this.over) {
@@ -188,7 +194,7 @@ export class Game {
             }
         }
 
-        if (!this.started) {
+        if (!this.started && !this.preventStart) {
             this.started = this.modeManager.isGameStarted();
             if (this.started) {
                 this.gas.advanceGasStage();

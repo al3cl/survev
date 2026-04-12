@@ -480,7 +480,7 @@ export class Obstacle extends BaseGameObject {
                         ? coldet.aabbToCircle(def.collision.min, def.collision.max).rad
                         : def.collision.rad;
 
-                const rad = math.remap(count, 0, 5, 0, colliderRad);
+                const rad = count > 1 ? math.remap(count, 0, 5, 0, colliderRad) : 0;
 
                 for (let i = 0; i < count; i++) {
                     const item = this.game.lootBarn.getLootTable(lootTierOrItem.tier!);
@@ -498,6 +498,7 @@ export class Obstacle extends BaseGameObject {
                         dir = v2.normalize(v2.sub(pos, lootPos));
                     } else {
                         dir = params.dir;
+                        pushSpeed = 7;
                     }
 
                     this.game.lootBarn.addLoot(
@@ -506,7 +507,7 @@ export class Obstacle extends BaseGameObject {
                         this.layer,
                         item.count,
                         undefined,
-                        pushSpeed, // undefined to use default push speed value
+                        pushSpeed,
                         dir,
                         lootTierOrItem.props?.preloadGuns || item.preload,
                         "obstacle",

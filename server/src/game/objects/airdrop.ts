@@ -25,6 +25,12 @@ export class AirdropBarn {
     update(dt: number) {
         for (let i = 0; i < this.airdrops.length; i++) {
             const airdrop = this.airdrops[i];
+            if (airdrop.sentLandedToClients) {
+                this.airdrops.splice(i, 1);
+                i--;
+                airdrop.destroy();
+                continue;
+            }
             airdrop.update(dt);
         }
     }
@@ -33,8 +39,7 @@ export class AirdropBarn {
         for (let i = 0; i < this.airdrops.length; i++) {
             const airdrop = this.airdrops[i];
             if (airdrop.landed) {
-                this.airdrops.splice(i, 1);
-                i--;
+                airdrop.sentLandedToClients = true;
             }
         }
     }
@@ -49,6 +54,7 @@ export class Airdrop extends BaseGameObject {
     fallTime = GameConfig.airdrop.fallTime;
     fallT = 0;
     landed = false;
+    sentLandedToClients = false;
 
     obstacleType: string;
     crateCollision: Collider;

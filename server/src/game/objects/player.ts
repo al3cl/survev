@@ -895,6 +895,7 @@ export class Player extends BaseGameObject {
     frozenTicker = 0;
     frozen = false;
     frozenOri = 0;
+    frozenType = "";
 
     private _hasteTicker = 0;
     hasteType: HasteType = GameConfig.HasteType.None;
@@ -924,11 +925,21 @@ export class Player extends BaseGameObject {
     fatModifier = 0;
     fatTicker = 0;
 
+    viewDistModifier = 0;
+    viewDistTicker = 0;
+
+    timeInsideGas = 0;
+
     promoteToRole(role: string) {
-        const roleDef = GameObjectDefs[role] as RoleDef;
+        let roleDef = GameObjectDefs[role] as RoleDef;
         if (!roleDef || roleDef.type !== "role") {
             this.game.logger.warn(`Invalid role type: ${role}`);
             return;
+        }
+
+        const roleOverride = this.game.map.mapDef.gameConfig.roles?.roleOverrides?.[role];
+        if (roleOverride) {
+            roleDef = util.mergeDeep({}, roleDef, roleOverride);
         }
 
         if (role === "leader") {
@@ -1075,6 +1086,16 @@ export class Player extends BaseGameObject {
         // we first need to build a list of the new perks to add
         const newPerks = new Set<string>();
         if (roleDef.perks) {
+            // client can only show 4 perks in the UI
+            // if this role has 4 or more perks, drop all our droppable perks
+            if (roleDef.perks.length >= 4) {
+                for (const perk of this.perks) {
+                    if (perk.droppable) {
+                        this.dropLoot(perk.type);
+                        this.removePerk(perk.type);
+                    }
+                }
+            }
             for (let i = 0; i < roleDef.perks.length; i++) {
                 const perkOrPerkFunc = roleDef.perks[i];
                 const perkType =
@@ -1524,11 +1545,11 @@ export class Player extends BaseGameObject {
                 const flareGunIndex = this.weapons.findIndex(
                     (w) => w.type === "flare_gun" || w.type === "flare_gun_dual",
                 );
+                this.hasFiredFlare = true;
+                this.flareTimer = 0;
                 if (flareGunIndex !== -1) {
                     this.weaponManager.setCurWeapIndex(flareGunIndex);
                     this.weaponManager.fireWeapon(false, true);
-                    this.hasFiredFlare = true;
-                    this.flareTimer = 0;
                     // go back to melee if we fired while downed lol
                     if (this.downed) {
                         this.weaponManager.setCurWeapIndex(GameConfig.WeaponSlot.Melee);
@@ -1679,16 +1700,27 @@ export class Player extends BaseGameObject {
             );
         }
 
-        if (this.game.gas.doDamage && this.game.gas.isInGas(this.pos)) {
-            this.damage({
-                amount: this.disconnected ? 22 : this.game.gas.damage,
-                damageType: GameConfig.DamageType.Gas,
-                dir: this.dir,
-            });
-            // don't continue the update if we died
-            if (this.dead) {
-                return;
+        if (this.game.gas.isInGas(this.pos)) {
+            if (this.game.gas.circleIdx > 2) {
+                this.timeInsideGas += dt;
             }
+
+            if (this.game.gas.doDamage) {
+                let damage = this.disconnected ? 22 : this.game.gas.damage;
+                const damageMulti = 1 + this.timeInsideGas * 0.025;
+
+                this.damage({
+                    amount: damage * damageMulti,
+                    damageType: GameConfig.DamageType.Gas,
+                    dir: this.dir,
+                });
+                // don't continue the update if we died
+                if (this.dead) {
+                    return;
+                }
+            }
+        } else {
+            this.timeInsideGas = 0;
         }
 
         if (this.reloadAgain && this.actionType !== GameConfig.Action.Revive) {
@@ -1885,6 +1917,15 @@ export class Player extends BaseGameObject {
             }
         }
 
+        if (this.viewDistModifier > 0) {
+            this.viewDistTicker -= dt;
+            if (this.viewDistTicker <= 0) {
+                this.viewDistModifier = 0;
+                this.viewDistTicker = 0;
+                this.zoomDirty = true;
+            }
+        }
+
         //
         // Calculate new speed, position and check for collision with obstacles
         //
@@ -2060,7 +2101,9 @@ export class Player extends BaseGameObject {
         //
 
         let finalZoom = this.scopeZoomRadius[this.scope];
-        let lowestZoom = this.scopeZoomRadius["1xscope"];
+        const lowestZoom = this.scopeZoomRadius["1xscope"];
+        finalZoom -= this.viewDistModifier;
+        finalZoom = math.max(lowestZoom, finalZoom);
 
         this.indoors = false;
 
@@ -3601,6 +3644,9 @@ export class Player extends BaseGameObject {
                 case GameConfig.Input.EquipThrowable:
                     if (this.curWeapIdx === GameConfig.WeaponSlot.Throwable) {
                         this.weaponManager.throwThrowable(true);
+                        if (this.animType === GameConfig.Anim.Cook) {
+                            this.cancelAnim();
+                        }
                         this.weaponManager.showNextThrowable();
                     } else {
                         this.weaponManager.setCurWeapIndex(
@@ -4147,6 +4193,14 @@ export class Player extends BaseGameObject {
                 const perkSlotType = this.perks.find(
                     (p) => p.droppable || p.replaceOnDeath === "halloween_mystery",
                 )?.type;
+
+                // The client can only show 4 perks in the UI.
+                // If the player already has 4 or more perks, they cannot pick up a new one.
+                if (!perkSlotType && this.perks.length >= 4) {
+                    amountLeft = 1;
+                    pickupMsg.type = net.PickupMsgType.MaxPerks;
+                    break;
+                }
                 if (perkSlotType) {
                     amountLeft = 1;
                     lootToAdd = isMistery ? "" : perkSlotType;
@@ -4209,6 +4263,8 @@ export class Player extends BaseGameObject {
             const weapon = this.weapons[i];
             if (!weapon.type) continue;
             if (weapon.type == "fists") continue;
+            const def = GameObjectDefs[weapon.type] as GunDef;
+            if (def.noDrop) continue;
             playerLootTypes.push(weapon.type);
         }
 
@@ -4238,6 +4294,7 @@ export class Player extends BaseGameObject {
     /** just used in potato mode, swaps oldWeapon with a random weapon of the same type (mosin -> m9) */
     randomWeaponSwap(params: DamageParams): void {
         if (this.dead) return;
+        if (this.role === "last_man") return;
         const oldWeapon = params.weaponSourceType || params.gameSourceType;
         if (!oldWeapon) return;
 
@@ -4299,13 +4356,23 @@ export class Player extends BaseGameObject {
             this.cancelAction();
         }
 
-        this.weaponManager.setWeapon(
-            index,
-            chosenWeaponType,
-            chosenWeaponDef.type == "gun"
-                ? this.weaponManager.getAmmoStats(chosenWeaponDef).maxClip
-                : 0,
-        );
+        switch (chosenWeaponDef.type) {
+            case "gun":
+                this.weaponManager.setWeapon(
+                    index,
+                    chosenWeaponType,
+                    this.weaponManager.getAmmoStats(chosenWeaponDef).maxClip,
+                );
+                break;
+            case "melee":
+                this.weaponManager.setWeapon(index, chosenWeaponType, 0);
+                break;
+            case "throwable":
+                if (!this.weaponManager.cookingThrowable) {
+                    this.weaponManager.setWeapon(index, chosenWeaponType, 0);
+                }
+                break;
+        }
 
         if ("switchDelay" in chosenWeaponDef) {
             this.weaponManager.weapons[index].cooldown = chosenWeaponDef.switchDelay;
@@ -4596,6 +4663,8 @@ export class Player extends BaseGameObject {
         this.debug.speedEnabled = msg.speedEnabled;
         this.debug.speed = math.clamp(msg.speed, 1, 10000);
 
+        this.game.debugSpeedMulti = msg.gameSpeedEnabled ? msg.gameSpeed : 1;
+
         // only accept ground or underground
         if (msg.toggleLayer) {
             this.layer = this.layer > 0 ? 0 : 1;
@@ -4607,6 +4676,8 @@ export class Player extends BaseGameObject {
         this.debug.godMode = msg.godMode;
 
         this.debug.moveObjMode.enabled = msg.moveObjs;
+
+        this.game.preventStart = msg.preventGameStart;
 
         if (msg.spawnLootType) {
             const def = GameObjectDefs[msg.spawnLootType];
@@ -4700,9 +4771,10 @@ export class Player extends BaseGameObject {
         this.setDirty();
     }
 
-    freeze(frozenOri: number, duration: number): void {
+    freeze(type: string, frozenOri: number, duration: number): void {
         this.frozenTicker = duration;
         this.frozen = true;
+        this.frozenType = type;
         this.frozenOri = frozenOri;
         this.setDirty();
     }
@@ -4771,6 +4843,13 @@ export class Player extends BaseGameObject {
         this.recalculateScale();
     }
 
+    decrementViewDistance() {
+        this.viewDistModifier += 1.5;
+        this.viewDistModifier = math.min(this.viewDistModifier, 32);
+        this.viewDistTicker = 2.5;
+        this.zoomDirty = true;
+    }
+
     giveHaste(type: HasteType, duration: number): void {
         this.hasteType = type;
         this.hasteSeq++;
@@ -4799,6 +4878,14 @@ export class Player extends BaseGameObject {
 
         if (this.game.map.potatoMode) {
             emote = "emote_potato";
+        }
+
+        if (this.game.map.potatoMode && this.game.map.factionMode) {
+            if (this.teamId === 1) {
+                emote = "emote_tomato";
+            } else if (this.teamId === 2) {
+                emote = "emote_potato";
+            }
         }
 
         this.game.playerBarn.addEmote(emote, this.__id);
